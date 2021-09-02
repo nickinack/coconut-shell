@@ -9,3 +9,4 @@
 
 char home_dir[10000]; // stores the home directory
 char cur_dir[10000];  // stores the current working directory
+int PROGRAM_EXIT;

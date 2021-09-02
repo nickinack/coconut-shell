@@ -1,4 +1,5 @@
 #include "prompt.h"
+#include "input.h"
 #include "headers.h"
 
 int main()
@@ -7,10 +8,10 @@ int main()
     while (1)
     {
         prompt();
-        char a[100];
-        scanf("%s", a);
-        if(strcmp(a, "exit") == 0){
-            return 0;
+        get_input();
+        if(PROGRAM_EXIT == -1){
+            break;
         }
     }
-}
+    return 0;
+} 
