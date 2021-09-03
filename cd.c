@@ -1,13 +1,14 @@
 #include "headers.h"
 #include "cd.h"
 
-void process_cd(int parts, char *args[]){
-    if (parts > 2)
+void process_cd(int parts, char *args[])
+{
+    if (parts >= 2)
     {
         printf("error for cd command to have more than one command-line argument \n");
         return;
     }
-    if (parts <= 1)
+    if (parts == 0)
     {
         printf("too few arguments \n");
         return;
@@ -17,7 +18,7 @@ void process_cd(int parts, char *args[]){
         printf("error in retrieving previous directory \n");
     }
     char *to_dir = (char *)malloc(SZE); 
-    strcpy(to_dir, args[1]);
+    strcpy(to_dir, args[0]);
     if (strcmp(to_dir, "-") == 0)
     {
         char *display_str = (char *)malloc(SZE);
@@ -48,7 +49,7 @@ void process_cd(int parts, char *args[]){
     int r1 = chdir(to_dir);
     if (r1 < 0)
     {
-        printf("invalid directory: %s \n", args[1]);
+        printf("invalid directory: %s \n", args[0]);
         return;
     }
     return;

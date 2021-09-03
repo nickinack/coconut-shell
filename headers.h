@@ -6,6 +6,7 @@
 #include<sys/stat.h>
 #include<fcntl.h>
 #define SZE 10000
+#define MINI_SZE 100
 
 char home_dir[10000]; // stores the home directory
 char cur_dir[10000];  // stores the current working directory

@@ -1,7 +1,0 @@
-{
-    "files.associations": {
-        "prompt.h": "c",
-        "stdio.h": "c",
-        "input.h": "c"
-    }
-}
