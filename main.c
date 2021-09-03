@@ -5,6 +5,7 @@
 int main()
 {
     getcwd(home_dir, SZE);
+    getcwd(prev_dir, SZE);
     while (1)
     {
         prompt();

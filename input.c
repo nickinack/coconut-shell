@@ -16,7 +16,8 @@ int get_input()
         PROGRAM_EXIT = -1;
         return -2;
     }
-    if(strcmp(buffer, "exit") == 0){
+    if (strcmp(buffer, "exit") == 0)
+    {
         printf("Exiting the shell .... \n");
         PROGRAM_EXIT = -1;
         return -1;
@@ -31,7 +32,8 @@ int tokenise(char *buffer, char **args){
     strcpy(temp_buf, buffer);
     char* token = strtok(temp_buf, space);
     int k = 0; 
-    while(token != NULL){
+    while (token != NULL)
+    {
         args[k++] = token;
         token = strtok(NULL, space);
     }
@@ -43,13 +45,16 @@ void process_input(char *buffer){
     char *args[100];
     int parts = tokenise(buffer, args);
     char *command = args[0];
-    if(strcmp(command, "cd") == 0){
+    if (strcmp(command, "cd") == 0)
+    {
         process_cd(parts, args);
     }
-    else if(strcmp(command, "ls") == 0){
+    else if (strcmp(command, "ls") == 0)
+    {
         printf("LS \n");
     }
-    else{
+    else
+    {
         printf("command not found: %s \n", command);
     }
 }  

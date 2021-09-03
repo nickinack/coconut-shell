@@ -13,13 +13,13 @@ int get_host_user_dir_details() {
         strcpy(username, err);
         return -1;
     }
-    if(r2 != 0)
+    if (r2 != 0)
     {
         perror("Error: while getting Host name");
         strcpy(hostname, err);
         return -1;
     }
-    if(strcmp(r3, "\0") == 0)
+    if (strcmp(r3, "\0") == 0)
     {
         perror("Error: while getting Current Working Directory");
         strcpy(cur_dir, err);
@@ -36,7 +36,7 @@ char* get_prompt() {
     strcat(str, "@");
     strcat(str, hostname);
     strcat(str, ":");
-    if(strstr(cur_dir, home_dir))
+    if (strstr(cur_dir, home_dir))
     {
         strcat(str, "~");
         int prompt_len = strlen(str);
