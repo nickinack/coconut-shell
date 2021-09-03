@@ -1,5 +1,6 @@
-#include "headers.h"
 #include "input.h"
+#include "cd.h"
+#include "headers.h"
 
 int get_input()
 {
@@ -43,7 +44,7 @@ void process_input(char *buffer){
     int parts = tokenise(buffer, args);
     char *command = args[0];
     if(strcmp(command, "cd") == 0){
-        printf("%d \n", parts);
+        process_cd(parts, args);
     }
     else if(strcmp(command, "ls") == 0){
         printf("LS \n");
@@ -51,4 +52,4 @@ void process_input(char *buffer){
     else{
         printf("command not found: %s \n", command);
     }
-}
+}  

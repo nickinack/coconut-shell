@@ -7,7 +7,7 @@ int get_host_user_dir_details() {
     int r2 = gethostname(hostname, SZE);
     char *r3 = getcwd(cur_dir, SZE);
     char *err = "-_-";
-    if (r1 != 0)
+    if (r1 != 0) 
     {
         perror("Error: while getting User name");
         strcpy(username, err);
@@ -36,9 +36,17 @@ char* get_prompt() {
     strcat(str, "@");
     strcat(str, hostname);
     strcat(str, ":");
-    if(strcmp(cur_dir, home_dir) == 0)
+    if(strstr(cur_dir, home_dir))
     {
         strcat(str, "~");
+        int prompt_len = strlen(str);
+        int home_dir_len = strlen(home_dir);
+        int cur_dir_len = strlen(cur_dir);
+        for (int i = home_dir_len; i < cur_dir_len; i++)
+        {
+            str[prompt_len] = cur_dir[i];
+            prompt_len++;
+        }
     }
     else
     {
