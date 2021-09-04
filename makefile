@@ -1,10 +1,13 @@
 all: initialize
 
-initialize: cd.o echo.o pwd.o main.o prompt.o input.o 
-	gcc -o a cd.o echo.o pwd.o main.o prompt.o input.o
+initialize: utils.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o 
+	gcc -o a utils.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o
 
 cd.o: cd.c
 	gcc -c cd.c
+
+ls.o: ls.c
+	gcc -c ls.c
 
 echo.o: echo.c
 	gcc -c echo.c

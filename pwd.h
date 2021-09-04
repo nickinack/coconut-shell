@@ -1,1 +1,1 @@
-void get_pwd(int parts, char **args);
+void pwd_implementation(int parts, char **args);

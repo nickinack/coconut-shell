@@ -1,1 +1,1 @@
-void process_cd(int parts, char *args[]);
+void cd_implementation(int parts, char *args[]);

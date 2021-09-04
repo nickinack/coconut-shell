@@ -1,7 +1,7 @@
 #include "headers.h"
 #include "pwd.h"
 
-void get_pwd(int parts, char **args)
+void pwd_implementation(int parts, char **args)
 {
     if(parts > 0)
     {

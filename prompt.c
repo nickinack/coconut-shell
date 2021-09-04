@@ -1,5 +1,6 @@
 #include "prompt.h"
 #include "headers.h"
+#include "utils.h"
 
 int get_host_user_dir_details() {
 
@@ -36,22 +37,7 @@ char* get_prompt() {
     strcat(str, "@");
     strcat(str, hostname);
     strcat(str, ":");
-    if (strstr(cur_dir, home_dir))
-    {
-        strcat(str, "~");
-        int prompt_len = strlen(str);
-        int home_dir_len = strlen(home_dir);
-        int cur_dir_len = strlen(cur_dir);
-        for (int i = home_dir_len; i < cur_dir_len; i++)
-        {
-            str[prompt_len] = cur_dir[i];
-            prompt_len++;
-        }
-    }
-    else
-    {
-        strcat(str, cur_dir);
-    }
+    strcat(str, tilda_add(cur_dir));
     strcat(str, ">");
     return str;
 }

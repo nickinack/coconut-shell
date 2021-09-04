@@ -1,6 +1,7 @@
 #include "input.h"
 #include "cd.h"
 #include "echo.h"
+#include "ls.h"
 #include "pwd.h"
 #include "headers.h"
 
@@ -42,6 +43,7 @@ int tokenise(char *buffer, char **args, char *cmd)
         args[k++] = token;
         token = strtok(NULL, space);
     }
+    args[k] = "\0";
     return k;
 }
 
@@ -53,11 +55,11 @@ void process_input(char *buffer)
     int parts = tokenise(buffer, args, cmd);
     if (strcmp(cmd, "cd") == 0)
     {
-        process_cd(parts, args);
+        cd_implementation(parts, args);
     }
     else if (strcmp(cmd, "ls") == 0)
     {
-        printf("LS \n");
+        ls_implementation(parts, args);
     }
     else if (strcmp(cmd, "echo") == 0)
     {
@@ -65,7 +67,7 @@ void process_input(char *buffer)
     }
     else if (strcmp(cmd, "pwd") == 0)
     {
-        get_pwd(parts, args);
+        pwd_implementation(parts, args);
     }
     else
     {

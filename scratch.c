@@ -7,12 +7,14 @@ int main(int argc, char *argv[])
     char *s = "Hello how !";
     strcpy(argv, s);
     int opt;
+    optind = 1;
     while ((opt = getopt(argc, argv, ":a:b:X")) != -1)
     {
-        switch (opt) 
+        switch (opt)
         {
         case 'a':
-        printf("Option a has arg: %s\n", optarg);
+        print("%d \n", optind);
+        printf("Option a has arg: %d\n", optind);
         break;
         case 'b':
         printf("Option b has arg: %s\n", optarg);
@@ -29,13 +31,12 @@ int main(int argc, char *argv[])
         }
     }
 
-    /* Get all of the non-option arguments */
     if (optind < argc) 
     {
-    printf("Non-option args: ");
-    while (optind < argc)
-        printf("%s ", argv[optind++]);
-    printf("\n");
+        printf("Non-option args: ");
+        while (optind < argc)
+            printf("%s ", argv[optind++]);
+        printf("\n");
     }
 
     return 0;

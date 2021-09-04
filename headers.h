@@ -5,6 +5,7 @@
 #include<stdlib.h>
 #include<sys/stat.h>
 #include<fcntl.h>
+#include <pwd.h>
 #define SZE 10000
 #define MINI_SZE 100
 
