@@ -15,7 +15,7 @@ void ls_implementation(int parts, char **args)
     }
     for (int i = 0; i < parts; i++)
     {
-        if (strcmp(args[i], "-al") == 0)
+        if (strcmp(args[i], "-al") == 0 || strcmp(args[i], "-la") == 0)
         {
             flag_a = 1;
             flag_l = 1;
