@@ -3,6 +3,9 @@ all: initialize
 initialize: utils.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o 
 	gcc -o a utils.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o
 
+utils.o: utils.c
+	gcc -c utils.c -std=c99
+
 cd.o: cd.c
 	gcc -c cd.c -std=c99
 
