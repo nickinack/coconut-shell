@@ -81,5 +81,10 @@ void pinfo_implementation(int parts, char *args[])
     printf("process status: %s\n", process_status);
     printf("memory: %s\n", memory);
     printf("executable path: %s\n", buf_exe);
+    free(dirname);
+    free(fname_stat);
+    free(fname_exe);
+    free(buf_stat);
+    free(buf_exe);
     return;
 }

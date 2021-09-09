@@ -4,6 +4,7 @@
 #include "ls.h"
 #include "pwd.h"
 #include "pinfo.h"
+#include "execute_cmd.h"
 #include "headers.h"
 
 int get_input()
@@ -74,6 +75,10 @@ void process_input(char *buffer)
     else if (strcmp(cmd, "pinfo") == 0)
     {
         pinfo_implementation(parts, args);
+    }
+    else if (parts >= 0)
+    {
+        execute_cmd(parts, cmd, args);
     }
     else
     {
