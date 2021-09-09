@@ -67,6 +67,15 @@ void pinfo_implementation(int parts, char *args[])
         printf("pinfo: cannot open exe file, permission denied \n");
         return;
     }
+    int fg_pid = tcgetpgrp(STDOUT_FILENO);
+    if (fg_pid < 0)
+    {
+        printf("pinfo: error getting current foreground pid");
+    }
+    if (pid == fg_pid)
+    {
+        strcat(process_status, "+");
+    }
     char *executable_path = tilda_add(buf_exe);
     printf("pid: %d\n", pid);
     printf("process status: %s\n", process_status);
