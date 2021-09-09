@@ -24,7 +24,7 @@ void pinfo_implementation(int parts, char *args[])
         printf("too many arguments for the command: pinfo \n");
         return;
     }
-    sprintf(num_to_str, "%d", pid);
+    sprintf(num_to_str, "%d/", pid);
     strcpy(dirname, "/proc/");
     strcat(dirname, num_to_str);
     strcpy(fname_stat, dirname);
@@ -59,6 +59,7 @@ void pinfo_implementation(int parts, char *args[])
             strcpy(memory, token);
         }
         token = strtok(NULL, " ");
+	i++;
     }
     int r1 = readlink(fname_exe, buf_exe, SZE);
     if (r1 == -1)
