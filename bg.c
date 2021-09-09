@@ -26,13 +26,13 @@ void bg_implementation(int parts, char *cmd, char *args[])
         {
             printf("[%s] child with pid [%d] exitted normally \n", cmd, corpse);
         }
-        if (WIFEXITED(status))
+        if (WIFEXITED(status) == -1)
         {
-            printf("child exited with status of %d\n", WEXITSTATUS(status));
+            printf("\n[%s] child with pid [%d] exitted abnormally \n", cmd, getpid());
         }
-        else
+        else if (WIFEXITED(status) == 0)
         {
-            printf("child did not exit successfully \n");
+            printf("\n[%s] child with pid [%d] exitted normally \n", cmd, getpid());
         }
     }
     else if (pid == 0)
@@ -40,7 +40,7 @@ void bg_implementation(int parts, char *cmd, char *args[])
         int r1 = execute_cmd(parts, cmd, args);
         if (r1 < 0)
         {
-            exit(1);
+            exit(-1);
         }
     }
     return;
