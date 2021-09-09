@@ -21,7 +21,10 @@ void bg_implementation(int parts, char *cmd, char *args[])
         printf("child pid [%d] initiated from parent pid [%d] \n", pid, ppid);
         int status;
         pid_t corpse;
-        corpse = waitpid(0, &status, WNOHANG);
+        while(corpse = waitpid(0, &status, WNOHANG) != -1)
+        {
+            //do
+        }
         if (corpse == -1)
         {
             printf("error");
