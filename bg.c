@@ -22,9 +22,9 @@ void bg_implementation(int parts, char *cmd, char *args[])
         int status;
         pid_t corpse;
         corpse = waitpid(0, &status, WNOHANG);
-        if (corpse != -1)
+        if (corpse == -1)
         {
-            printf("[%s] child with pid [%d] exitted normally \n", cmd, corpse);
+            printf("error");
         }
         if (WIFEXITED(status) == -1)
         {
