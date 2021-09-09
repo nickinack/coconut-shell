@@ -3,6 +3,7 @@
 #include "echo.h"
 #include "ls.h"
 #include "pwd.h"
+#include "pinfo.h"
 #include "headers.h"
 
 int get_input()
@@ -69,6 +70,10 @@ void process_input(char *buffer)
     else if (strcmp(cmd, "pwd") == 0)
     {
         pwd_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "pinfo") == 0)
+    {
+        pinfo_implementation(parts, args);
     }
     else
     {
