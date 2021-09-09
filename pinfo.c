@@ -40,7 +40,7 @@ void pinfo_implementation(int parts, char *args[])
     FILE *stat = fopen(fname_stat, "r");
     if(!stat)
     {
-        printf("pinfo: stat file dosen't exist for the process");
+        printf("pinfo: stat file dosen't exist for the process \n");
         return;
     }
     char *process_status = (char *)malloc(2);
