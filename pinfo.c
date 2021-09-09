@@ -47,7 +47,7 @@ void pinfo_implementation(int parts, char *args[])
     char *memory = (char *)malloc(SZE);
     fgets(buf_stat, SZE, stat);
     char *token = strtok(buf_stat, " ");
-    int stat_idx = 2, i = 0, mem_idx = 21;
+    int stat_idx = 2, i = 0, mem_idx = 22;
     while (token != NULL)
     {
         if (i == stat_idx)
