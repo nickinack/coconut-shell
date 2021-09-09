@@ -19,6 +19,11 @@ void execute_cmd(int parts, char *cmd, char *args[])
         printf("%s \n", exec_args[i]);
     }
     int r1 = execvp(cmd, exec_args);
-    printf("%d \n", r1);
+    if (r1 < 0)
+    {
+        printf("command failed with return value 1 \n");
+        exit(1);
+    }
+    exit(0);
     return;
 }
