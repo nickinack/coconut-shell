@@ -14,10 +14,6 @@ void execute_cmd(int parts, char *cmd, char *args[])
         exec_args[i + 1] = args[i];
     }
     exec_args[parts + 1] = NULL;
-    for (int i = 0; i <= parts; i++)
-    {
-        printf("%s \n", exec_args[i]);
-    }
     int r1 = execvp(cmd, exec_args);
     if (r1 < 0)
     {
