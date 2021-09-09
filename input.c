@@ -5,6 +5,7 @@
 #include "pwd.h"
 #include "pinfo.h"
 #include "bg.h"
+#include "fg.h"
 #include "headers.h"
 
 int get_input()
@@ -82,6 +83,6 @@ void process_input(char *buffer)
     }
     else
     {
-        printf("command not found: %s \n", cmd);
+        fg_implementation(parts, cmd, args);
     }
 }  

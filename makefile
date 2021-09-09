@@ -1,7 +1,7 @@
 all: initialize
 
-initialize: utils.o execute_cmd.o pinfo.o bg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o 
-	gcc -o a utils.o execute_cmd.o pinfo.o bg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o
+initialize: utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o 
+	gcc -o a utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o
 
 utils.o: utils.c
 	gcc -c utils.c
@@ -14,6 +14,9 @@ pinfo.o: pinfo.c
 
 bg.o: bg.c
 	gcc -c bg.c
+
+fg.o: fg.c
+	gcc -c fg.c
 
 cd.o: cd.c
 	gcc -c cd.c 
