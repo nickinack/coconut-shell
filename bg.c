@@ -22,7 +22,19 @@ void bg_implementation(int parts, char *cmd, char *args[])
     }
     else if (pid == 0)
     {
-        execute_cmd(parts, cmd, args);
+        int r1 = execute_cmd(parts, cmd, args);
+        int cpid = getpid();
+        if (r1 < 0)
+        {
+            int r2 = kill(cpid, SIGKILL);
+            if (r2 < 0)
+            {
+                printf("%s with pid %d exitted abnormally", cmd, cpid);
+                exit(1);
+            }
+        }
+        printf("%s with pid %d exitted normally", cmd, cpid);
+        exit(0);
     }
     return;
 }

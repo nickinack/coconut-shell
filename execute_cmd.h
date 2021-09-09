@@ -1,1 +1,1 @@
-void execute_cmd(int parts, char *cmd, char *args[]);
+int execute_cmd(int parts, char *cmd, char *args[]);

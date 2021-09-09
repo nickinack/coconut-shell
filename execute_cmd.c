@@ -1,7 +1,7 @@
 #include "headers.h"
 #include "execute_cmd.h"
 
-void execute_cmd(int parts, char *cmd, char *args[])
+int execute_cmd(int parts, char *cmd, char *args[])
 {
     char *exec_args[MINI_SZE];
     if (strcmp(args[parts-1], "&") == 0)
@@ -18,8 +18,8 @@ void execute_cmd(int parts, char *cmd, char *args[])
     if (r1 < 0)
     {
         printf("command failed with return value 1 \n");
-        exit(1);
+        return -1;
     }
-    exit(0);
-    return;
+    printf("done! \n");
+    return 0;
 }
