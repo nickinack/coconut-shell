@@ -15,13 +15,13 @@ int get_input()
     size_t command;
     buffer = (char *)malloc(bufsize * sizeof(char));
     int ptr = getline(&buffer, &bufsize, stdin);
-    buffer[ptr-1] = '\0';
     if (buffer == NULL)
     {
         perror("Unable to allocate buffer \n");
         PROGRAM_EXIT = -1;
         return -2;
     }
+    buffer[ptr-1] = '\0';
     if (strcmp(buffer, "exit") == 0)
     {
         printf("Exiting the shell .... \n");
@@ -38,6 +38,10 @@ int tokenise(char *buffer, char **args, char *cmd)
     char temp_buf[SZE];
     strcpy(temp_buf, buffer);
     char *token = strtok(temp_buf, space);
+    if (token == NULL)
+    {
+        return -1;
+    }
     int k = 0;
     strcpy(cmd, token);
     token = strtok(NULL, space);
@@ -57,6 +61,10 @@ void process_input(char *buffer)
     char *args[MINI_SZE];
     char *cmd = (char *)malloc(SZE);
     int parts = tokenise(buffer, args, cmd);
+    if (parts == -1)
+    {
+        return;
+    }
     if (strcmp(cmd, "cd") == 0)
     {
         cd_implementation(parts, args);
