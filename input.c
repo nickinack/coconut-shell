@@ -34,7 +34,7 @@ int tokenise(char *buffer, char **args, char *cmd)
     char space[MINI_SZE] = " \n\t\r";
     char temp_buf[SZE];
     strcpy(temp_buf, buffer);
-    char* token = strtok(temp_buf, space);
+    char *token = strtok(temp_buf, space);
     int k = 0;
     strcpy(cmd, token);
     token = strtok(NULL, space);
@@ -44,6 +44,7 @@ int tokenise(char *buffer, char **args, char *cmd)
         token = strtok(NULL, space);
     }
     args[k] = "\0";
+    free(token);
     return k;
 }
 

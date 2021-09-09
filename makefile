@@ -4,27 +4,27 @@ initialize: utils.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o
 	gcc -o a utils.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o
 
 utils.o: utils.c
-	gcc -c utils.c -std=c99
+	gcc -c utils.c
 
 cd.o: cd.c
-	gcc -c cd.c -std=c99
+	gcc -c cd.c 
 
 ls.o: ls.c
-	gcc -c ls.c -std=c99
+	gcc -c ls.c 
 
 echo.o: echo.c
-	gcc -c echo.c -std=c99
+	gcc -c echo.c 
 
 pwd.o: pwd.c
-	gcc -c pwd.c -std=c99
+	gcc -c pwd.c 
 
 main.o: main.c
-	gcc -c main.c -std=c99
+	gcc -c main.c 
 
 prompt.o: prompt.c
-	gcc -c prompt.c -std=c99
+	gcc -c prompt.c 
 
 input.o: input.c
-	gcc -c input.c -std=c99
+	gcc -c input.c 
 
 
