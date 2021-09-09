@@ -21,10 +21,18 @@ void bg_implementation(int parts, char *cmd, char *args[])
         printf("child pid [%d] initiated from parent pid [%d] \n", pid, ppid);
         int status;
         pid_t corpse;
-        corpse = waitpid(0, &status, WIFEXITED | WNOHANG);
+        corpse = waitpid(0, &status, WNOHANG);
         if (corpse != -1)
         {
             printf("[%s] child with pid [%d] exitted normally \n", cmd, corpse);
+        }
+        if (WIFEXITED(status))
+        {
+            printf("child exited with status of %d\n", WEXITSTATUS(status));
+        }
+        else
+        {
+            printf("child did not exit successfully \n");
         }
     }
     else if (pid == 0)
