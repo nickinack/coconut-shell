@@ -42,3 +42,28 @@ char *tilda_add(char *address)
         return address;
     }
 }
+
+void sigchld_handler(int sig)
+{
+    pid_t cpid;
+    int status;
+    cpid = waitpid(-1, &status, WNOHANG);
+    if (cpid == -1)
+    {
+        return;
+    }
+    int idx = traverse(cpid, head);
+    if (idx == -1)
+    {
+        return;
+    }
+    struct proc *bg_process = delete(idx, head);
+    if (WIFEXITED(status))
+    {
+        printf("[%s] command with pid [%d] ended normally \n", bg_process->cmd, bg_process->pid);
+    }
+    else
+    {
+        printf("[%s] command with pid [%d] ended abnormally \n", bg_process->cmd, bg_process->pid);
+    }
+}

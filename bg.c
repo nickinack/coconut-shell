@@ -18,22 +18,8 @@ void bg_implementation(int parts, char *cmd, char *args[])
     else if (pid != 0)
     {
         pid_t ppid = getpid();
+        add(pid, cmd, head);
         printf("child pid [%d] initiated from parent pid [%d] \n", pid, ppid);
-        int status;
-        pid_t corpse;
-        corpse = waitpid(0, &status, WNOHANG);
-        if (corpse == -1)
-        {
-            printf("error");
-        }
-        if (!WIFEXITED(status))
-        {
-            printf("\n[%s] child with pid [%d] exitted abnormally \n", cmd, getpid());
-        }
-        else if (WIFEXITED(status))
-        {
-            printf("\n[%s] child with pid [%d] exitted normally \n", cmd, getpid());
-        }
     }
     else if (pid == 0)
     {
@@ -41,9 +27,9 @@ void bg_implementation(int parts, char *cmd, char *args[])
         pid_t cpid = getpid();
         if (r1 < 0)
         {
-            kill(cpid, SIGKILL);
-            exit(-1);
+            exit(1);
         }
     }
     return;
 }
+
