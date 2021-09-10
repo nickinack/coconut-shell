@@ -58,39 +58,53 @@ int tokenise(char *buffer, char **args, char *cmd)
 void process_input(char *buffer)
 {   
     // tokenise, arguments
-    char *args[MINI_SZE];
-    char *cmd = (char *)malloc(SZE);
-    int parts = tokenise(buffer, args, cmd);
-    if (parts == -1)
+    char colon[MINI_SZE] = ";";
+    char *token = strtok(buffer, ";");
+    char *instructions[MINI_SZE];
+    int k = 0;
+    while (token != NULL)
     {
-        return;
+        //tokenise(token, args, cmd);
+        instructions[k++] = token;
+        token = strtok(NULL, ";");
     }
-    if (strcmp(cmd, "cd") == 0)
+    for (int i = 0; i < k; i++)
     {
-        cd_implementation(parts, args);
+        char *args[MINI_SZE];
+        char *cmd = (char *)malloc(MINI_SZE);
+        int parts = tokenise(instructions[i], args, cmd);
+        if (parts == -1)
+        {
+            continue;
+        }
+        if (strcmp(cmd, "cd") == 0)
+        {
+            cd_implementation(parts, args);
+        }
+        else if (strcmp(cmd, "ls") == 0)
+        {
+            ls_implementation(parts, args);
+        }
+        else if (strcmp(cmd, "echo") == 0)
+        {
+            echo_implementation(parts, args);
+        }
+        else if (strcmp(cmd, "pwd") == 0)
+        {
+            pwd_implementation(parts, args);
+        }
+        else if (strcmp(cmd, "pinfo") == 0)
+        {
+            pinfo_implementation(parts, args);
+        }
+        else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
+        {
+            bg_implementation(parts, cmd, args);
+        }
+        else
+        {
+            fg_implementation(parts, cmd, args);
+        }
+        free(cmd);
     }
-    else if (strcmp(cmd, "ls") == 0)
-    {
-        ls_implementation(parts, args);
-    }
-    else if (strcmp(cmd, "echo") == 0)
-    {
-        echo_implementation(parts, args);
-    }
-    else if (strcmp(cmd, "pwd") == 0)
-    {
-        pwd_implementation(parts, args);
-    }
-    else if (strcmp(cmd, "pinfo") == 0)
-    {
-        pinfo_implementation(parts, args);
-    }
-    else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
-    {
-        bg_implementation(parts, cmd, args);
-    }
-    else
-    {
-        fg_implementation(parts, cmd, args);
-    }
-}  
+}
