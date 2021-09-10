@@ -21,30 +21,23 @@ void bg_implementation(int parts, char *cmd, char *args[])
         printf("child pid [%d] initiated from parent pid [%d] \n", pid, ppid);
         int status;
         pid_t corpse;
-        while(corpse = waitpid(0, &status, WNOHANG) != -1)
-        {
-            //do
-        }
+        corpse = waitpid(0, &status, WNOHANG);
         if (corpse == -1)
         {
             printf("error");
         }
-        if (WIFEXITED(status) == -1)
+        if (!WIFEXITED(status))
         {
             printf("\n[%s] child with pid [%d] exitted abnormally \n", cmd, getpid());
         }
-        else if (WIFEXITED(status) == 0)
+        else if (WIFEXITED(status))
         {
             printf("\n[%s] child with pid [%d] exitted normally \n", cmd, getpid());
         }
     }
     else if (pid == 0)
     {
-        int r1 = execute_cmd(parts, cmd, args);
-        if (r1 < 0)
-        {
-            exit(-1);
-        }
+        execute_cmd(parts, cmd, args);
     }
     return;
 }

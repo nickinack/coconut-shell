@@ -17,7 +17,7 @@ int execute_cmd(int parts, char *cmd, char *args[])
     int r1 = execvp(cmd, exec_args);
     if (r1 < 0)
     {
-        return -1;
+        exit(1);
     }
     exit(0);
     return 0;
