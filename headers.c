@@ -9,24 +9,24 @@ struct proc *create(pid_t pid, char *cmd)
     return new_node;
 }
 
-void add(pid_t pid, char *cmd, struct proc *head)
+void add(pid_t pid, char *cmd, struct proc **head)
 {
-    struct proc *cur = head;
+    struct proc *cur = *head;
+    struct proc *new_node = initialize_proc();
+    new_node->pid = pid;
+    strcpy(new_node->cmd, cmd);
     while (cur->next != NULL)
     {
         cur = cur->next;
     }
-    cur->next = malloc(sizeof(struct proc));
-    cur->next->pid = pid;
-    strcpy(cur->next->cmd, cmd);
-    cur->next->next = NULL;
+    cur->next = new_node;
     return;
 }
 
 struct proc *delete(int idx, struct proc *head)
 {
-    struct proc *ret;
-    ret->next = NULL;
+
+    struct proc *ret = initialize_proc();
     ret->pid = -1;
     if (head == NULL)
     {
@@ -47,7 +47,8 @@ struct proc *delete(int idx, struct proc *head)
         cur = cur->next;
     }
     temp = cur->next;
-    ret = temp;
+    ret->pid = temp->pid;
+    strcpy(ret->cmd, temp->cmd);
     cur->next = temp->next;
     free(temp);
     return ret;
@@ -61,7 +62,7 @@ int traverse(pid_t pid, struct proc *head)
         return -1;
     }
     struct proc *cur = head;
-    while (cur->next != NULL)
+    while (cur != NULL)
     {
         if (cur->pid == pid)
         {
@@ -71,7 +72,40 @@ int traverse(pid_t pid, struct proc *head)
         {
             return -1;
         }
+        cur = cur->next;
         i++;
     }
     return -1;
+}
+
+struct proc *initialize_proc()
+{
+    struct proc *a = malloc(sizeof(struct proc));
+    a->pid = 0;
+    a->cmd = (char *)malloc(MINI_SZE);
+    a->next = NULL;
+    return a;
+}
+
+void set_val(struct proc *a, pid_t pid, char *cmd)
+{
+    a->pid = pid;
+    strcpy(a->cmd, cmd);
+}
+
+void print_val(struct proc *a)
+{
+    printf("pid: %d \n", a->pid);
+    printf("cmd: %s \n", a->cmd);
+}
+
+void print_list(struct proc *head)
+{
+    struct proc *cur = head;
+    while (cur != NULL)
+    {
+        printf("%d \n", cur->pid);
+        cur = cur->next;
+    }
+    return;
 }

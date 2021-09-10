@@ -18,7 +18,7 @@ void bg_implementation(int parts, char *cmd, char *args[])
     else if (pid != 0)
     {
         pid_t ppid = getpid();
-        add(pid, cmd, head);
+        add(pid, cmd, &head);
         printf("child pid [%d] initiated from parent pid [%d] \n", pid, ppid);
     }
     else if (pid == 0)
@@ -27,6 +27,7 @@ void bg_implementation(int parts, char *cmd, char *args[])
         pid_t cpid = getpid();
         if (r1 < 0)
         {
+            kill(cpid, SIGKILL);
             exit(1);
         }
     }

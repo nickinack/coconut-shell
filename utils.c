@@ -1,5 +1,6 @@
 #include "headers.h"
 #include "utils.h"
+#include "prompt.h"
 
 char *tilda_change(char *address)
 {
@@ -57,13 +58,18 @@ void sigchld_handler(int sig)
     {
         return;
     }
-    struct proc *bg_process = delete(idx, head);
+    struct proc *bg_process = delete (idx, head);
     if (WIFEXITED(status))
     {
-        printf("[%s] command with pid [%d] ended normally \n", bg_process->cmd, bg_process->pid);
+        printf("\n[%s] command with pid [%d] ended normally \n", bg_process->cmd, bg_process->pid);
+        prompt();
+        fflush(stdout);
     }
     else
     {
-        printf("[%s] command with pid [%d] ended abnormally \n", bg_process->cmd, bg_process->pid);
+        printf("\n[%s] command with pid [%d] ended abnormally \n", bg_process->cmd, bg_process->pid);
+        prompt();
+        fflush(stdout);
     }
+    
 }
