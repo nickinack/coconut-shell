@@ -37,7 +37,13 @@ void bg_implementation(int parts, char *cmd, char *args[])
     }
     else if (pid == 0)
     {
-        execute_cmd(parts, cmd, args);
+        int r1 = execute_cmd(parts, cmd, args);
+        pid_t cpid = getpid();
+        if (r1 < 0)
+        {
+            kill(cpid, SIGKILL);
+            exit(-1);
+        }
     }
     return;
 }
