@@ -14,7 +14,7 @@ void fg_implementation(int parts, char *cmd,  char *args[])
     {
         int wstatus;
         pid_t ppid = getpid();
-        wait(NULL);
+        waitpid(pid, &wstatus, WUNTRACED);
     }
     else if (pid == 0)
     {
