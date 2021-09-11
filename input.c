@@ -7,6 +7,7 @@
 #include "pinfo.h"
 #include "bg.h"
 #include "fg.h"
+#include "repeat.h"
 
 int get_input()
 {
@@ -96,6 +97,10 @@ void process_input(char *buffer)
         else if (strcmp(cmd, "pinfo") == 0)
         {
             pinfo_implementation(parts, args);
+        }
+        else if (strcmp(cmd, "repeat") == 0)
+        {
+            repeat_implementation(parts, args);
         }
         else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
         {

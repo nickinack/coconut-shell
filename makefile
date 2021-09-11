@@ -1,7 +1,7 @@
 all: initialize
 
-initialize: headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o 
-	gcc -o a headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o
+initialize: headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o
+	gcc -o a headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o
 
 headers.o: headers.c
 	gcc -c headers.c
@@ -42,6 +42,12 @@ prompt.o: prompt.c
 input.o: input.c
 	gcc -c input.c 
 
+repeat.o: repeat.c
+	gcc -c repeat.c
+
 clean:
 	rm -rf *.o 
+	rm -rf a
+	rm -rf a.out.dSYM
+
 

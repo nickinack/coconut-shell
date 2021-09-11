@@ -4,9 +4,12 @@
 int execute_cmd(int parts, char *cmd, char *args[])
 {
     char *exec_args[MINI_SZE];
-    if (strcmp(args[parts-1], "&") == 0)
+    if (parts > 0)
     {
-        parts -= 1;
+        if (strcmp(args[parts-1], "&") == 0)
+        {
+            parts -= 1;
+        }
     }
     exec_args[0] = cmd;
     for (int i = 0; i < parts; i++)
