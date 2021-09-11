@@ -1,3 +1,4 @@
+#include "headers.h"
 #include "input.h"
 #include "cd.h"
 #include "echo.h"
@@ -6,7 +7,6 @@
 #include "pinfo.h"
 #include "bg.h"
 #include "fg.h"
-#include "headers.h"
 
 int get_input()
 {

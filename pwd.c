@@ -16,5 +16,6 @@ void pwd_implementation(int parts, char **args)
         return;
     }
     printf("%s \n", pwd);
+    free(pwd);
     return;
 }

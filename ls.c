@@ -1,6 +1,6 @@
+#include "headers.h"
 #include "ls.h"
 #include "utils.h"
-#include "headers.h"
 
 void ls_implementation(int parts, char **args)
 {
@@ -130,6 +130,7 @@ void ls_dir(char *dir, int flag_a, int flag_l)
             printf("\t%s", entry->d_name);
             free(system);
             free(date);
+            free(buf);
             printf("\n");
         }
     }
@@ -139,6 +140,8 @@ void ls_dir(char *dir, int flag_a, int flag_l)
             continue;
         printf("%s \n", entry->d_name);
     }
+    free(entry);
+    free(folder);
     return;
 }
 
@@ -170,5 +173,7 @@ blkcnt_t cnt_blocks(char *dir)
         free(system);
         free(buf);
     }
+    free(entry);
+    free(folder);
     return total_blocks;
 }

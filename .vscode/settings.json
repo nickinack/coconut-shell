@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "headers.h": "c",
-        "utils.h": "c",
-        "prompt.h": "c",
-        "input.h": "c"
-    }
-}

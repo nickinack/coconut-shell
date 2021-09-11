@@ -25,12 +25,14 @@ void cd_implementation(int parts, char *args[])
     if (strcmp(to_dir, "-") == 0)
     {
         char *display_str = (char *)malloc(SZE);
-        strcat(display_str, tilda_add(prev_dir));
+        strcpy(display_str, tilda_add(prev_dir));
         strcpy(to_dir, prev_dir);
         printf("%s \n", display_str);
+        free(display_str);
     }
     getcwd(prev_dir, SZE);
     int r1 = chdir(to_dir);
+    free(to_dir);
     if (r1 < 0)
     {
         printf("invalid directory: %s \n", args[0]);

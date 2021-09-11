@@ -42,4 +42,6 @@ prompt.o: prompt.c
 input.o: input.c
 	gcc -c input.c 
 
+clean:
+	rm -rf *.o 
 

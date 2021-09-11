@@ -1,7 +1,7 @@
+#include "headers.h"
 #include "prompt.h"
 #include "utils.h"
 #include "input.h"
-#include "headers.h"
 
 int main()
 {

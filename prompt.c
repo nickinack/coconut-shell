@@ -6,26 +6,27 @@ int get_host_user_dir_details() {
 
     int r1 = getlogin_r(username, SZE);
     int r2 = gethostname(hostname, SZE);
-    char *r3 = getcwd(cur_dir, SZE);
-    char *err = "-_-";
+    char *r3 = (char *)malloc(MINI_SZE);
+    strcpy(r3, getcwd(cur_dir, SZE));
     if (r1 != 0) 
     {
         perror("Error: while getting User name");
-        strcpy(username, err);
+        PROGRAM_EXIT = 1;
         return -1;
     }
     if (r2 != 0)
     {
         perror("Error: while getting Host name");
-        strcpy(hostname, err);
+        PROGRAM_EXIT = 1;
         return -1;
     }
     if (strcmp(r3, "\0") == 0)
     {
         perror("Error: while getting Current Working Directory");
-        strcpy(cur_dir, err);
+        PROGRAM_EXIT = 1;
         return -1;
     }
+    free(r3);
     return 0;
 }
 
@@ -44,7 +45,6 @@ char* get_prompt() {
 
 void prompt() {
     char* str = get_prompt();
-    printf(PROMPT_COLOR);
-    printf("%s ", str);
-    printf(DEFAULT_COLOR);
+    printf("%s%s%s ", PROMPT_COLOR, str, DEFAULT_COLOR);
+    free(str);
 }
