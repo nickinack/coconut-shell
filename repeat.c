@@ -10,9 +10,9 @@ void repeat_implementation(int parts, char **args)
     {
         buf[i - 2] = args[i];
     }
-    if (strcmp(args[0], "repeat") == 0)
+    if (parts <= 0)
     {
-        repeat_implementation(parts - 1, buf);
+        printf("repeat: provide command \n");
         return;
     }
     for(int i = 0 ; i < strlen(args[0]) ; ++i)
@@ -25,7 +25,14 @@ void repeat_implementation(int parts, char **args)
     }
     for (int i = 0; i < atoi(args[0]); i++)
     {
-        fg_implementation(parts - 2, args[1], buf);
+        if (strcmp(args[1], "repeat") == 0)
+        {
+            repeat_implementation(parts - 2, buf);
+        }
+        else
+        {
+            fg_implementation(parts - 2, args[1], buf);
+        }
     }
     return;
 }

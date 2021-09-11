@@ -19,7 +19,7 @@ int main()
         prompt();
         get_input();
         if(PROGRAM_EXIT == -1){
-            break;
+            return 0;
         }
     }
     return 0;
