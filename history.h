@@ -1,0 +1,12 @@
+char *history[100];
+int hist_size;
+char *hname;
+void history_implementation(char *cmd);
+void history_handle(int parts, char **args);
+struct history *initialize_entry();
+void append_entry(char *cmd);
+void write_to_file();
+void retrieve_history();
+void print_history(int num);
+void set_hpath(char *hname);
+void initialize(char *history[20]);

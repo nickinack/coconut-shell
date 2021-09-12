@@ -8,6 +8,7 @@
 #include "bg.h"
 #include "fg.h"
 #include "repeat.h"
+#include "history.h"
 
 int get_input()
 {
@@ -16,6 +17,8 @@ int get_input()
     size_t command;
     buffer = (char *)malloc(bufsize * sizeof(char));
     int ptr = getline(&buffer, &bufsize, stdin);
+    buffer[ptr] = '\0';
+    history_implementation(buffer);
     if (buffer == NULL)
     {
         perror("Unable to allocate buffer \n");
@@ -57,7 +60,7 @@ int tokenise(char *buffer, char **args, char *cmd)
 }
 
 void process_input(char *buffer)
-{   
+{
     // tokenise, arguments
     char colon[MINI_SZE] = ";";
     char *token = strtok(buffer, ";");
@@ -101,6 +104,10 @@ void process_input(char *buffer)
         else if (strcmp(cmd, "repeat") == 0)
         {
             repeat_implementation(parts, args);
+        }
+        else if (strcmp(cmd, "history") == 0)
+        {
+            history_handle(parts, args);
         }
         else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
         {

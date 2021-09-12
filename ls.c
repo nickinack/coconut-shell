@@ -5,7 +5,11 @@
 void ls_implementation(int parts, char **args)
 {
     char *dirs_to_ls[MINI_SZE];
-    int dirs_num = 0;
+    for (int i = 0; i < MINI_SZE; i++)
+    {
+        dirs_to_ls[i] = (char *)malloc(MINI_SZE);
+    }
+        int dirs_num = 0;
     int flag_a = 0;
     int flag_l = 0;
     if (parts == 0)
@@ -37,7 +41,7 @@ void ls_implementation(int parts, char **args)
             struct stat dir;
             if (stat(args[i], &dir) == 0 && S_ISDIR(dir.st_mode))
             {
-                dirs_to_ls[dirs_num] = args[i];
+                strcpy(dirs_to_ls[dirs_num], args[i]);
                 dirs_num++;
             }
             else
