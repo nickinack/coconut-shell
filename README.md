@@ -45,3 +45,26 @@ Once done, the shell output would look something like this:
 | misc. | any command not handled above will be handled by the `execvp()` process and be treated as a foreground process. | `<cmd> <cmd_args>` | `vim abc.txt`
 
 ## Files 
+Each of the file listed below includes its corresponding `.c` and `.h` files.
+ - `main`: runs the while loop till an exit command is given or a fatal error occurs. Inside the loop, we get the input and display the prompt.
+ - `input`: gets the input, tokenizes multiple commands based on `;` and each of the commands are tokenized further based on `<spac>` and we then get the commands and the list of arguments and direct the flow to the respective command execution files.
+ - `ls`: execution of the ls command. Flag booleans are collected, list of directories are stored and we use hte `readdir()` system call along with `stat` for displaying list of directories and files along with file permissions (subjected to which flag is provided).
+ - `cd`: cd into a directory using the `chdir()` system call.
+ - `pwd`: get the current working directory using the `getpwd()` system call.
+ - `echo`: print the tokenized arguments.
+ - `pinfo`: access the `/proc/[pid]/` directory and read the files `stat` (for reading the current status and memory usage) and `exec` (readlink) in order to provide info about the process.
+ - `bg`: run the given command in background, store the command and associated pid in a linked list so that when the process terminates, we go to the signal handler, use the `waitpid()` system call with the `WNOHANG` parameter in order to get the pid, use `WIFEXITED` in order to check exit status and print the termination message. If the return value of `execvp` for a background process is -1, we kill the background process using the `kill(pid, SIGCHLD)` system call for the `WIFEXITED` to give an abnormal termination return value.
+ - `fg`: run the process in foreground and halt the terminal input by using `waitpid()` system call with the `WUNTRACED` parameter. Once process is done, waitpid captures the termination signal and program flow of the parent process continues.
+ - `history`: use a character array to store history and use file operations to store the past 20 commands in a file named `history.txt`. <b>Do not use</b> make clean if you want to retain history between two shell runs.
+ - `repeat`: recursively repeat the given command until we surpass the last repeat. 
+ - `utils`: functions to add `~` to an absolute path for user inputs, remove `~` in order to make the directories accessible by system calls and signal handlers for process terminations.
+ 
+ ## Assumptions
+ For the ease of coding, the following assumptions have been made:
+ - The sizes of strings given as input to the shell do not exceed 100,000 and the size of each command does not exceed 10,000. 
+ - The structure of the files in `/proc/[pid]` does not vary across systems.
+ - we kill background process on `execvp` failure.
+ - The shell is limited to linux systems.
+ 
+ ## Author
+ 🥥-shell has been designed by <a href="https://nickinack.github.io/">karthik viswanathan</a>.
