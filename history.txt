@@ -1,4 +1,9 @@
 exit
+history 4
+exit
+sleep 4
+sleep 10 &
+exit
 exit
 history 10
 hey
@@ -13,8 +18,3 @@ ls -al . ..
 exit
 ls -al . ..
 ls
-ls -al . ..
-ls -al . ..
-ls -al .
-exit
-ls -al .
