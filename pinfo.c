@@ -47,7 +47,8 @@ void pinfo_implementation(int parts, char *args[])
     char *memory = (char *)malloc(SZE);
     fgets(buf_stat, SZE, stat);
     char *token = strtok(buf_stat, " ");
-    int stat_idx = 2, i = 0, mem_idx = 22;
+    int tg_pid = 0;
+    int stat_idx = 2, i = 0, mem_idx = 22, tgpid_idx=7;
     while (token != NULL)
     {
         if (i == stat_idx)
@@ -58,6 +59,10 @@ void pinfo_implementation(int parts, char *args[])
         {
             strcpy(memory, token);
         }
+	else if (i == tgpid_idx)
+	{
+	    tg_pid = atoi(token);
+	}
         token = strtok(NULL, " ");
 	i++;
     }
@@ -67,12 +72,11 @@ void pinfo_implementation(int parts, char *args[])
         printf("pinfo: cannot open exe file, permission denied \n");
         return;
     }
-    int fg_pid = tcgetpgrp(STDOUT_FILENO);
-    if (fg_pid < 0)
+    if (tg_pid < 0)
     {
         printf("pinfo: error getting current foreground pid");
     }
-    if (pid == fg_pid)
+    if (pid == tg_pid)
     {
         strcat(process_status, "+");
     }
