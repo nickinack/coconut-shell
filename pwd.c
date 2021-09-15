@@ -1,5 +1,6 @@
 #include "headers.h"
 #include "pwd.h"
+#include "utils.h"
 
 void pwd_implementation(int parts, char **args)
 {
@@ -15,7 +16,7 @@ void pwd_implementation(int parts, char **args)
         printf("getcwd() error \n");
         return;
     }
-    printf("%s \n", pwd);
+    printf("%s \n", tilda_add(pwd));
     free(pwd);
     return;
 }
