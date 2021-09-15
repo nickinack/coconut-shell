@@ -1,4 +1,6 @@
+#include "headers.h"
 #include "utils.h"
+#include "execute_cmd.h"
 
 void fg_implementation(int parts, char *cmd,  char *args[])
 {
@@ -21,7 +23,7 @@ void fg_implementation(int parts, char *cmd,  char *args[])
     }
     else if (pid == 0)
     {
-        printf("%d \n", getpid());
+        // printf("%d \n", getpid());
         execute_cmd(parts, cmd, args);
     }
     return;

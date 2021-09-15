@@ -1,4 +1,15 @@
 exit
+sleep 2
+gedit
+exit
+pwd
+cd abc
+mkdir abc
+cd ~
+pwd
+cd ..
+pwd
+exit
 history 4
 exit
 sleep 4
@@ -7,14 +18,3 @@ exit
 exit
 history 10
 hey
-ls -al .
-exit
-history 20
-exit
-ls -a . ..
-ls -al . ..
-exit
-ls -al . ..
-exit
-ls -al . ..
-ls
