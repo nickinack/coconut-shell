@@ -1,20 +1,20 @@
 exit
-ls -l .. prompt.c
-ls -l ..
 ls -l 
-exit
-exit
-exir
-ls .. prompt.c
-ls -a .. prompt.c
-exit
-ls -a .. prompt.c
-exit
-ls -l .. prompt.o
-ls -l .. .
-exit
-ls -l prompt.o 
+ls
+cd Downloads
+cd ..
+cd ..
+cd ..
+ls -l 
 ls -l ..
 exit
-ls -l ..
-ls -l ..
+ls -l
+ls -l
+ls -l
+ls -l
+ls -l
+exit
+ls 
+ls -l
+exit
+ls -l

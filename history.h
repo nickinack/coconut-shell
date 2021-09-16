@@ -1,4 +1,4 @@
-char *history[100];
+char *history[30];
 int hist_size;
 char *hname;
 void history_implementation(char *cmd);

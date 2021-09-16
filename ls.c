@@ -4,12 +4,12 @@
 
 void ls_implementation(int parts, char **args)
 {
-    char *dirs_to_ls[MINI_SZE];
-    char *file_to_ls[MINI_SZE];
-    for (int i = 0; i < MINI_SZE; i++)
+    char *dirs_to_ls[100];
+    char *file_to_ls[100];
+    for (int i = 0; i < 100; i++)
     {
-        dirs_to_ls[i] = (char *)malloc(MINI_SZE);
-        file_to_ls[i] = (char *)malloc(MINI_SZE);
+        dirs_to_ls[i] = (char *)malloc(100);
+        file_to_ls[i] = (char *)malloc(100);
     }
     int dirs_num = 0;
     int file_num = 0;

@@ -14,9 +14,9 @@ void history_implementation(char *cmd)
     write_to_file();
     return;
 }
-void initialize(char *history[100])
+void initialize(char *history[30])
 {
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < 30; i++)
     {
         history[i] = (char *)malloc(SZE);
     }

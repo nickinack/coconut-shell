@@ -119,4 +119,5 @@ void process_input(char *buffer)
         }
         free(cmd);
     }
+    free(token);
 }

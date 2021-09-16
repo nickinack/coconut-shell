@@ -21,7 +21,6 @@ int main()
     // strcpy(head->cmd, "shell");
     while (1)
     {
-
         prompt();
         get_input();
         if(PROGRAM_EXIT == -1){
