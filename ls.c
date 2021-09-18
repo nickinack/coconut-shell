@@ -151,7 +151,20 @@ void ls_dir(char *dir, int flag_a, int flag_l)
             printf("\t%s", usr->pw_name);
             printf("\t%s", grp->gr_name);
             printf("\t%lld", (long long int)fileStat.st_size);
-            strftime(date, 50, "%b  %d  %I: %M", gmtime(&(fileStat.st_ctime)));
+            struct tm * timeinfo = gmtime(&fileStat.st_ctime);
+            int f_month = timeinfo->tm_mon;
+            time_t now;
+            time(&now);
+            struct tm *curinfo = localtime(&now);
+            int c_month = curinfo->tm_mon;
+            if (c_month - f_month > 6)
+            {
+                strftime(date, 50, "%b %e  %Y ", timeinfo);
+            }
+            else
+            {
+                strftime(date, 50, "%b  %d  %I: %M ", gmtime(&(fileStat.st_ctime)));
+            }
             printf("\t%s", date);
             printf("\t%s", entry->d_name);
             free(system);
@@ -173,6 +186,7 @@ void ls_dir(char *dir, int flag_a, int flag_l)
 
 void ls_file(char *system)
 {
+    char* mod_time;
     struct stat fileStat;
     struct passwd *usr;
     struct group *grp;

@@ -18,7 +18,7 @@ void initialize(char *history[30])
 {
     for (int i = 0; i < 30; i++)
     {
-        history[i] = (char *)malloc(SZE);
+        history[i] = (char *)malloc(MINI_SZE);
     }
 }
 void append_entry(char *cmd)

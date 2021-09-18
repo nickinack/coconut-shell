@@ -1,20 +1,20 @@
 exit
-ls -l 
-ls
-cd Downloads
+cd coconut-shell
+cd ..
+cd ass2
+cd OSN
+cd Desktop
+ls -l
 cd ..
 cd ..
 cd ..
-ls -l 
-ls -l ..
+ls -l
 exit
 ls -l
-ls -l
-ls -l
-ls -l
+exit
 ls -l
 exit
-ls 
+ls -l
 ls -l
 exit
 ls -l

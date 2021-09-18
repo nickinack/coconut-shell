@@ -51,10 +51,10 @@ int tokenise(char *buffer, char **args, char *cmd)
     token = strtok(NULL, space);
     while (token != NULL)
     {
-        args[k++] = token;
+        strcpy(args[k++], token);
         token = strtok(NULL, space);
     }
-    args[k] = "\0";
+    args[k] = NULL;
     free(token);
     return k;
 }
@@ -74,7 +74,13 @@ void process_input(char *buffer)
     }
     for (int i = 0; i < k; i++)
     {
-        char *args[MINI_SZE];
+        char **args = (char **) malloc(MINI_SZE * sizeof(char *));
+        args[0] = (char *) malloc(MINI_SZE * sizeof(char));
+        for (int i = 0; i < MINI_SZE-1; i++)
+        {
+            args[i+1] = (char *) malloc(MINI_SZE * sizeof(char));
+        }
+        args[MINI_SZE] = NULL;
         char *cmd = (char *)malloc(MINI_SZE);
         int parts = tokenise(instructions[i], args, cmd);
         if (parts == -1)
@@ -117,6 +123,11 @@ void process_input(char *buffer)
         {
             fg_implementation(parts, cmd, args);
         }
+        for (int i = 0; i < MINI_SZE-1; i++)
+        {
+            free(args[i]);
+        }
+        free(args);
         free(cmd);
     }
     free(token);

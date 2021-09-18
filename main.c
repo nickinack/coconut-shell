@@ -14,7 +14,7 @@ int main()
     initialize(history);
     char *cmd = "";
     set_val(head, getpid(), cmd);
-    hname = (char *)malloc(SZE);
+    hname = (char *)malloc(MINI_SZE);
     set_hpath(hname);
     retrieve_history();
     // print_val(head);
