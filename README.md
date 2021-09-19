@@ -37,7 +37,7 @@ Once done, the shell output would look something like this:
 | pwd | print the current working directory | `pwd` | `pwd`
 | cd | cd into the specified directory. | `cd <arg1>` | `cd ~` and `cd` for working root, `cd <path>` for any path, `cd -` for previous working directory, `cd ..` for parent directory and so on`
 | ls | for each operand that names a file of a type other than directory, ls displays its name as well as any requested, associated information. | `ls <flag_list 1> <dir_list_1> <flag_list 2> <dir_list_2>...<flag_list_n> <dir_list_n>` | `ls -al <dir_list>` for hidden directories and their read write permissions, `ls -a <dir_list>` for hidden directories, `ls -l <dir_list>` for permissions and long format list, `ls <dir_list>` for all directory formats except `-` specified above.
-| pinfo | given a process id, output info about the the given process. | `pinfo <process_id>` | `pinfo 1324`
+| pinfo | given a process id, output info about the the given process. If the process is running in foreground a `+` is added to the status. | `pinfo <process_id>` | `pinfo 1324`
 | history | provide history of commands entered (max: 20) in the order of oldest to newest. | `history <num>` | `history 10`
 | repeats | repeats the given command for n times. multiple repeats in the same commands will be handled by recursion. | `repeat <times> <cmd>` | `repeat 4 repeat 2 echo 1`
 | background | runs a process in background and provides termination status of the process one done. | `<cmd> <cmd_args> &` | `gedit abc.txt &`
