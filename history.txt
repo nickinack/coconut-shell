@@ -1,20 +1,20 @@
 exit
-ls ~
-ls ~
-ls ~
-ls ~
-ls ~
-ls ~
-ls ~
-ls ~
-ls ~
-ls ~
-ls ~
+ls ~ prompt.c
 exit
+ls -l ~ prompt.c
 exit
-open execute_cmd.h &
+ls -l ~ prompt.c
 exit
-ls -l
+ls -l ~ prompt.o
 exit
-cd coconut-shell
-cd ..
+ls -al ~ prompt.c
+ls ~ prompt.c
+exit
+ls ~ prompt.o
+exit
+ls ~
+ls ~
+ls ~
+ls ~
+ls ~
+ls ~

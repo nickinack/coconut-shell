@@ -37,15 +37,15 @@ void ls_implementation(int parts, char **args)
         }
         else 
         {
-            if(access(args[i], F_OK ) == 0 && strcmp(args[i], "..") && strcmp(args[i], ".") && strcmp(args[i], "~")) 
-            {
-                strcpy(file_to_ls[file_num], args[i]);
-                file_num++;
-            }
             if(strcmp(args[i], "~") == 0)
             {
                 strcpy(dirs_to_ls[dirs_num], home_dir);
                 dirs_num++;
+            }
+            else if(access(args[i], F_OK ) == 0 && strcmp(args[i], "..") && strcmp(args[i], ".") && strcmp(args[i], "~")) 
+            {
+                strcpy(file_to_ls[file_num], args[i]);
+                file_num++;
             }
             else 
             {
