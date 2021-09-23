@@ -67,4 +67,4 @@ Each of the file listed below includes its corresponding `.c` and `.h` files.
  - The shell is limited to linux systems.
  
  ## Author
- 🥥-shell has been designed by <a href="https://nickinack.github.io/">karthik viswanathan</a>.
+ 🥥-shell has been designed by <a href="https://nickinack.github.io/">Karthik Viswanathan</a>.
