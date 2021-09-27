@@ -1,4 +1,9 @@
 exit
+emacs &
+sleep 5 &
+gedit &
+exit
+exit
 vim b.txt
 ls > a.txt ; sort < a.txt > b.txt
 vim a.txt
@@ -13,8 +18,3 @@ sort > a.txt
 sort > a.txt
 sort > a.txt
 sort > a.txt
-vim b.txt
-vim a.txt
-vim c.txt
-sort < a.txt > b.txt ; ls > c.txt
-vim b.txt

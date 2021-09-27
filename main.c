@@ -10,6 +10,7 @@ int main()
     getcwd(home_dir, SZE);
     getcwd(prev_dir, SZE);
     head = initialize_proc();
+    head->pid = getpid();
     hist_size = 0;
     initialize(history);
     char *cmd = "";

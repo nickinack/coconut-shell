@@ -114,9 +114,10 @@ char proc_status(pid_t pid)
             process_status = token[0]; 
             break;       
         }
+	i++;
+	token = strtok(NULL, " ");
     }
     free(fname);
     free(buf_stat);
-    free(token);
     return process_status;
 }
