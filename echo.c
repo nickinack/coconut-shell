@@ -5,7 +5,7 @@ void echo_implementation(int parts, char ** args)
 {
     for (int i = 0; i < parts; i++)
     {
-        printf("%s", args[i]);
+        printf("%s ", args[i]);
     }
     printf("\n");
 }

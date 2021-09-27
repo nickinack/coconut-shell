@@ -1,20 +1,20 @@
 exit
-ls ~ prompt.c
+vim b.txt
+ls > a.txt ; sort < a.txt > b.txt
+vim a.txt
+sort < a.txt ; ls > a.txt
+sort < a.txt
+vim a.txt
 exit
-ls -l ~ prompt.c
-exit
-ls -l ~ prompt.c
-exit
-ls -l ~ prompt.o
-exit
-ls -al ~ prompt.c
-ls ~ prompt.c
-exit
-ls ~ prompt.o
-exit
-ls ~
-ls ~
-ls ~
-ls ~
-ls ~
-ls ~
+sort < a.txt
+vim a.txt
+sort < a.txt
+sort > a.txt
+sort > a.txt
+sort > a.txt
+sort > a.txt
+vim b.txt
+vim a.txt
+vim c.txt
+sort < a.txt > b.txt ; ls > c.txt
+vim b.txt

@@ -9,16 +9,26 @@ struct proc *create(pid_t pid, char *cmd)
     return new_node;
 }
 
+int compare_jobs(struct proc *a, struct proc *b) {
+     return strcmp(a->cmd, b->cmd);
+}
+
 void add(pid_t pid, char *cmd, struct proc **head)
 {
-    struct proc *cur = *head;
+    // lexicographical addition
     struct proc *new_node = initialize_proc();
     new_node->pid = pid;
     strcpy(new_node->cmd, cmd);
-    while (cur->next != NULL)
+    if (head == NULL || compare_jobs(new_node, *head) < 0) {
+        new_node->next = *head;
+        return;
+    }
+    struct proc *cur = *head;
+    while (cur->next != NULL && compare_jobs(new_node, cur->next) >= 0)
     {
         cur = cur->next;
     }
+    new_node->next = cur->next;
     cur->next = new_node;
     return;
 }
@@ -105,6 +115,17 @@ void print_list(struct proc *head)
     while (cur != NULL)
     {
         printf("%d \n", cur->pid);
+        cur = cur->next;
+    }
+    return;
+}
+
+void print_jobs(struct proc *head)
+{
+    struct proc *cur = head;
+    while (cur != NULL)
+    {
+        printf("%d %s \n", cur->pid, cur->cmd);
         cur = cur->next;
     }
     return;

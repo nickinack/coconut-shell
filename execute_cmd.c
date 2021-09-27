@@ -17,8 +17,7 @@ int execute_cmd(int parts, char *cmd, char *args[])
         exec_args[i + 1] = args[i];
     }
     exec_args[parts + 1] = NULL;
-    int r1 = execvp(cmd, exec_args);
-    if (r1 < 0)
+    if (execvp(cmd, exec_args) < 0)
     {
         return -1;
     }

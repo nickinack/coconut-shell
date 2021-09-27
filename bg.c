@@ -10,6 +10,7 @@
 void bg_implementation(int parts, char *cmd, char *args[])
 {
     pid_t pid = fork();
+    setpgid(0, 0);
     if (pid < 0)
     {
         printf("failed to initiate fork \n");

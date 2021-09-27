@@ -9,6 +9,7 @@
 #include "fg.h"
 #include "repeat.h"
 #include "history.h"
+#include "dup_fd.h"
 
 int get_input()
 {
@@ -38,6 +39,9 @@ int get_input()
 
 int tokenise(char *buffer, char **args, char *cmd)
 {
+    char *fin = (char *)malloc(MINI_SZE);
+    char *fout = (char *)malloc(MINI_SZE);
+    char mode;
     char space[MINI_SZE] = " \n\t\r";
     char temp_buf[SZE];
     strcpy(temp_buf, buffer);
@@ -51,6 +55,47 @@ int tokenise(char *buffer, char **args, char *cmd)
     token = strtok(NULL, space);
     while (token != NULL)
     {
+        if (strlen(token) == 1 && token[0] == '>')
+        {
+            // output should be redirected to this file
+            token = strtok(NULL, space);
+            if (token == NULL)
+            {
+                return -1;
+            }
+            fout = token;
+            char mode = 'n';
+            CURRENT_OUT = dup_fd_out(fout, mode);
+            token = strtok(NULL, space);
+            continue;
+        }
+        else if (strlen(token) == 1 && token[0] == '<')
+        {
+            // contents of this file should be redirected to input command
+            token = strtok(NULL, space);
+            if (token == NULL)
+            {
+                return -1;
+            }
+            fin = token;
+            CURRENT_IN = dup_fd_in(fin);
+            token = strtok(NULL, space);
+            continue;
+        }
+        else if (strlen(token) == 2 && strcmp(token, ">>") == 0)
+        {
+            // output should be redirected and appended to this file
+            token = strtok(NULL, space);
+            if (token == NULL)
+            {
+                return -1;
+            }
+            fout = token;
+            char mode = 'a';
+            CURRENT_OUT = dup_fd_out(fout, mode);
+            token = strtok(NULL, space);
+            continue;
+        }
         strcpy(args[k++], token);
         token = strtok(NULL, space);
     }
@@ -74,6 +119,8 @@ void process_input(char *buffer)
     }
     for (int i = 0; i < k; i++)
     {
+        CURRENT_IN = 0;
+        CURRENT_OUT = 0;
         char **args = (char **) malloc(MINI_SZE * sizeof(char *));
         args[0] = (char *) malloc(MINI_SZE * sizeof(char));
         for (int i = 0; i < MINI_SZE-1; i++)
@@ -86,6 +133,10 @@ void process_input(char *buffer)
         if (parts == -1)
         {
             continue;
+        }
+        if (CURRENT_IN == -1 || CURRENT_OUT == -1)
+        {
+            return;
         }
         if (strcmp(cmd, "cd") == 0)
         {
@@ -127,6 +178,10 @@ void process_input(char *buffer)
         {
             free(args[i]);
         }
+        char mode = 'i';
+        restore_fd(CURRENT_IN, mode);
+        mode = 'o';
+        restore_fd(CURRENT_OUT, mode);
         free(args);
         free(cmd);
     }

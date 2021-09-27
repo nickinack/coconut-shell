@@ -16,7 +16,7 @@ void pwd_implementation(int parts, char **args)
         printf("getcwd() error \n");
         return;
     }
-    printf("%s \n", tilda_add(pwd));
+    printf("%s \n", pwd);
     free(pwd);
     return;
 }

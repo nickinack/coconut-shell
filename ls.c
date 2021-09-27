@@ -37,19 +37,20 @@ void ls_implementation(int parts, char **args)
         }
         else 
         {
+            struct stat dir;
             if(strcmp(args[i], "~") == 0)
             {
                 strcpy(dirs_to_ls[dirs_num], home_dir);
                 dirs_num++;
             }
-            else if(access(args[i], F_OK ) == 0 && strcmp(args[i], "..") && strcmp(args[i], ".") && strcmp(args[i], "~")) 
+            else if(access(args[i], F_OK ) == 0 && strcmp(args[i], "..") && strcmp(args[i], ".") && strcmp(args[i], "~") && (stat(args[i], &dir) == 0 && S_ISDIR(dir.st_mode) == 0))
             {
+                printf("%d  \n", S_ISDIR(dir.st_mode));
                 strcpy(file_to_ls[file_num], args[i]);
                 file_num++;
             }
             else 
             {
-                struct stat dir;
                 if (stat(args[i], &dir) == 0 && S_ISDIR(dir.st_mode))
                 {
                     strcpy(dirs_to_ls[dirs_num], args[i]);
