@@ -1,4 +1,5 @@
 #include "headers.h"
+#include "pinfo.h"
 
 struct proc *create(pid_t pid, char *cmd)
 {
@@ -18,6 +19,7 @@ void add(pid_t pid, char *cmd, struct proc **head)
     // lexicographical addition
     struct proc *new_node = initialize_proc();
     new_node->pid = pid;
+    new_node->shell_id = CUR_BG_ID++;
     strcpy(new_node->cmd, cmd);
     if (head == NULL || compare_jobs(new_node, *head) < 0) {
         new_node->next = *head;
@@ -38,6 +40,7 @@ struct proc *delete(int idx, struct proc *head)
 
     struct proc *ret = initialize_proc();
     ret->pid = -1;
+    ret->shell_id = -1;
     if (head == NULL)
     {
         return ret;
@@ -93,6 +96,7 @@ struct proc *initialize_proc()
     struct proc *a = malloc(sizeof(struct proc));
     a->pid = 0;
     a->cmd = (char *)malloc(MINI_SZE);
+    a->shell_id = -1;
     a->next = NULL;
     return a;
 }
@@ -120,12 +124,25 @@ void print_list(struct proc *head)
     return;
 }
 
-void print_jobs(struct proc *head)
+void print_jobs(struct proc *head, char flags[])
 {
     struct proc *cur = head;
     while (cur != NULL)
     {
-        printf("%d %s \n", cur->pid, cur->cmd);
+        char stat = proc_status(cur->pid);
+        char *stat_word = (stat == 'R' ? "Running" : "Stopped");
+        if (strlen(flags) == 2)
+        {
+            printf("%d %s %d %s \n", cur->pid, cur->cmd, cur->shell_id, stat_word);
+        }
+        else if (flags[0] == 'r' && stat == 'R')
+        {
+            printf("%d %s %d %s \n", cur->pid, cur->cmd, cur->shell_id, stat_word);
+        }
+        else if (flags[0] == 's' && stat == 'S')
+        {
+            printf("%d %s %d %s \n", cur->pid, cur->cmd, cur->shell_id, stat_word);
+        }
         cur = cur->next;
     }
     return;

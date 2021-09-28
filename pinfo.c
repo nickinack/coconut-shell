@@ -92,3 +92,31 @@ void pinfo_implementation(int parts, char *args[])
     free(buf_exe);
     return;
 }
+
+char proc_status(pid_t pid)
+{
+    char *fname = (char *)malloc(MINI_SZE);
+    char *buf_stat = (char *)malloc(SZE);
+    int i = 0;
+    char process_status = 'n';
+    sprintf(fname, "/proc/%d/stat", pid);
+    FILE *stat = fopen(fname, "r");
+    if(!stat)
+    {
+        return process_status;
+    }
+    fgets(buf_stat, SZE, stat);
+    char *token = strtok(buf_stat, " ");
+    while (token != NULL)
+    {
+        if (i == 2)
+        {
+            process_status = token[0]; 
+            break;       
+        }
+    }
+    free(fname);
+    free(buf_stat);
+    free(token);
+    return process_status;
+}

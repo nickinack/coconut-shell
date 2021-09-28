@@ -17,10 +17,13 @@ int main()
     hname = (char *)malloc(MINI_SZE);
     set_hpath(hname);
     retrieve_history();
+    CUR_BG_ID = 0;
     // print_val(head);
     // strcpy(head->cmd, "shell");
     while (1)
     {
+        char *flags = "rs";
+        print_jobs(head, flags);
         prompt();
         get_input();
         if(PROGRAM_EXIT == -1){

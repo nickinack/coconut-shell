@@ -16,10 +16,12 @@ char cur_dir[10000];  // stores the current working directory
 char prev_dir[10000];
 int PROGRAM_EXIT;
 int SKIP_SCAN;
+int CUR_BG_ID;
 struct proc
 {
     pid_t pid;
     char *cmd;
+    int shell_id;
     struct proc *next;
 };
 struct proc *head;
@@ -31,3 +33,4 @@ int traverse(pid_t pid, struct proc *head);
 void set_val(struct proc *a, pid_t pid, char *cmd);
 void print_val(struct proc *a);
 void print_list(struct proc *head);
+void print_jobs(struct proc *head, char flags[]);
