@@ -67,7 +67,8 @@ void sigchld_handler(int sig)
     }
     else
     {
-        printf("\n[%s] command with pid [%d] ended abnormally \n", bg_process->cmd, bg_process->pid);
+        char *cmd = strtok(bg_process->cmd, " ");
+        printf("\n[%s] command with pid [%d] ended abnormally \n", cmd, bg_process->pid);
         prompt();
         fflush(stdout);
     }

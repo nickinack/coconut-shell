@@ -127,21 +127,22 @@ void print_list(struct proc *head)
 void print_jobs(struct proc *head, char flags[])
 {
     struct proc *cur = head;
+    cur = cur->next;
     while (cur != NULL)
     {
         char stat = proc_status(cur->pid);
         char *stat_word = (stat == 'R' ? "Running" : "Stopped");
         if (strlen(flags) == 2)
         {
-            printf("%d %s %d %s \n", cur->pid, cur->cmd, cur->shell_id, stat_word);
+            printf("[%d] %s %s %d \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
         else if (flags[0] == 'r' && stat == 'R')
         {
-            printf("%d %s %d %s \n", cur->pid, cur->cmd, cur->shell_id, stat_word);
+            printf("[%d] %s %s %d \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
         else if (flags[0] == 's' && stat == 'S')
         {
-            printf("%d %s %d %s \n", cur->pid, cur->cmd, cur->shell_id, stat_word);
+            printf("[%d] %s %s %d \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
         cur = cur->next;
     }

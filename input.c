@@ -10,6 +10,7 @@
 #include "repeat.h"
 #include "history.h"
 #include "dup_fd.h"
+#include "jobs.h"
 
 int get_input()
 {
@@ -165,6 +166,10 @@ void process_input(char *buffer)
         else if (strcmp(cmd, "history") == 0)
         {
             history_handle(parts, args);
+        }
+        else if (strcmp(cmd, "jobs") == 0)
+        {
+            jobs_implementation(parts, args);
         }
         else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
         {

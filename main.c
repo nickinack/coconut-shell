@@ -23,8 +23,6 @@ int main()
     // strcpy(head->cmd, "shell");
     while (1)
     {
-        char *flags = "rs";
-        print_jobs(head, flags);
         prompt();
         get_input();
         if(PROGRAM_EXIT == -1){

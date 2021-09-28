@@ -19,7 +19,14 @@ void bg_implementation(int parts, char *cmd, char *args[])
     else if (pid != 0)
     {
         pid_t ppid = getpid();
-        add(pid, cmd, &head);
+        char *full_cmd = (char *)malloc(SZE);
+        strcpy(full_cmd, cmd);
+        for (int i = 0; i < parts; i++)
+        {
+            strcat(full_cmd, " ");
+            strcat(full_cmd, args[i]);
+        }
+        add(pid, full_cmd, &head);
         printf("child pid [%d] initiated from parent pid [%d] \n", pid, ppid);
     }
     else if (pid == 0)
