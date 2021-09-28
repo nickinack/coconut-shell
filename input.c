@@ -11,6 +11,7 @@
 #include "history.h"
 #include "dup_fd.h"
 #include "jobs.h"
+#include "sig.h"
 
 int get_input()
 {
@@ -170,6 +171,10 @@ void process_input(char *buffer)
         else if (strcmp(cmd, "jobs") == 0)
         {
             jobs_implementation(parts, args);
+        }
+        else if (strcmp(cmd, "sig") == 0)
+        {
+            sig_implementation(parts, args);
         }
         else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
         {

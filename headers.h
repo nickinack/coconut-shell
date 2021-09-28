@@ -34,3 +34,4 @@ void set_val(struct proc *a, pid_t pid, char *cmd);
 void print_val(struct proc *a);
 void print_list(struct proc *head);
 void print_jobs(struct proc *head, char flags[]);
+pid_t get_pid_from_id(int id, struct proc *head);

@@ -91,6 +91,30 @@ int traverse(pid_t pid, struct proc *head)
     return -1;
 }
 
+pid_t get_pid_from_id(int id, struct proc *head)
+{
+    int i = 0;
+    if (head == NULL)
+    {
+        return -1;
+    }
+    struct proc *cur = head;
+    while (cur != NULL)
+    {
+        if (cur->shell_id == id)
+        {
+            return cur->pid;
+        }
+        if (cur->next == NULL)
+        {
+            return -1;
+        }
+        cur = cur->next;
+        i++;
+    }
+    return -1;
+}
+
 struct proc *initialize_proc()
 {
     struct proc *a = malloc(sizeof(struct proc));
@@ -134,15 +158,15 @@ void print_jobs(struct proc *head, char flags[])
         char *stat_word = (stat == 'R' ? "Running" : "Stopped");
         if (strlen(flags) == 2)
         {
-            printf("[%d] %s %s %d \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
+            printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
         else if (flags[0] == 'r' && stat == 'R')
         {
-            printf("[%d] %s %s %d \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
+            printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
         else if (flags[0] == 's' && stat == 'S')
         {
-            printf("[%d] %s %s %d \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
+            printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
         cur = cur->next;
     }

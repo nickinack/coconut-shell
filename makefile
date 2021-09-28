@@ -1,7 +1,7 @@
 all: initialize
 
-initialize: headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o
-	gcc -o a headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o
+initialize: headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o
+	gcc -o a headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o
 
 headers.o: headers.c
 	gcc -c headers.c
@@ -53,6 +53,9 @@ dup_fd.o: dup_fd.c
 
 jobs.o: jobs.c
 	gcc -c jobs.c
+
+sig.o: sig.c
+	gcc -c sig.c
 
 clean:
 	rm -rf *.o 
