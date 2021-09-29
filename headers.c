@@ -182,7 +182,6 @@ void print_jobs(struct proc *head, char flags[])
     {
         char stat = proc_status(cur->pid);
         char *stat_word = (stat == 'T' ? "Stopped" : stat == 'n' ? "Stopped" : "Running");
-        printf("%c \n", stat);
         if (strlen(flags) == 2)
         {
             printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
