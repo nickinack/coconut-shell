@@ -155,12 +155,12 @@ void print_jobs(struct proc *head, char flags[])
     while (cur != NULL)
     {
         char stat = proc_status(cur->pid);
-        char *stat_word = (stat == 'R' ? "Running" : "Stopped");
+        char *stat_word = (stat == 'T' ? "Stopped" : "Running");
         if (strlen(flags) == 2)
         {
             printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
-        else if (flags[0] == 'r' && stat == 'R')
+        else if ((flags[0] == 'r') && stat == 'R')
         {
             printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
