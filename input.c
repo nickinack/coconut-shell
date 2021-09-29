@@ -12,6 +12,7 @@
 #include "dup_fd.h"
 #include "jobs.h"
 #include "sig.h"
+#include "bg.h"
 
 int get_input()
 {
@@ -176,6 +177,10 @@ void process_input(char *buffer)
         {
             sig_implementation(parts, args);
         }
+	else if (strcmp(cmd, "bg") == 0)
+	{
+	    bg_implementation(parts, args);
+	}
         else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
         {
             background_implementation(parts, cmd, args);

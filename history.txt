@@ -1,20 +1,20 @@
 exit
+jobs
+bg 0
+pinfo 17417
+bg 0
+jobs -s
+jobs
 emacs &
-sleep 5 &
-gedit &
+bg 0
+sleep 40 &
+bg 0
+jobs
+sleep 40 &
+bg 0
+emacs &
+bg 0
+jobs
+pinfo 15631
+emacs &
 exit
-exit
-vim b.txt
-ls > a.txt ; sort < a.txt > b.txt
-vim a.txt
-sort < a.txt ; ls > a.txt
-sort < a.txt
-vim a.txt
-exit
-sort < a.txt
-vim a.txt
-sort < a.txt
-sort > a.txt
-sort > a.txt
-sort > a.txt
-sort > a.txt
