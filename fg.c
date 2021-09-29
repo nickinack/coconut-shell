@@ -38,9 +38,5 @@ void fg_implementation(int parts, char **args)
     {
         printf("fg: process with pid [%d] has suspended normally \n", pid);
     }
-    else
-    {
-        printf("fg: process with pid [%d] has suspended abnormally \n", pid);
-    }
     return;
 }

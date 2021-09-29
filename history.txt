@@ -1,4 +1,11 @@
 exit
+fg 1
+jobs
+sleep 10 &
+fg 0
+jobs
+sleep 40 &
+exit
 pinfo 52573
 jobs
 bg 1
@@ -11,10 +18,3 @@ sleep 5
 sleep 40 &
 exit
 pinfo 52342
-jobs -s
-ls
-sig - 9
-jobs -r
-sig 2 9
-pinfo 52342
-emacs abc.txt &
