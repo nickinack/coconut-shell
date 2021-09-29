@@ -67,6 +67,32 @@ struct proc *delete(int idx, struct proc *head)
     return ret;
 }
 
+struct proc *get_node(int idx, struct proc *head)
+{
+
+    struct proc *ret = initialize_proc();
+    ret->pid = -1;
+    ret->shell_id = -1;
+    if (head == NULL)
+    {
+        return ret;
+    }
+    if (idx == 0)
+    {
+        return ret;
+    }
+    struct proc *cur = head;
+    for (int i = 0; i < idx - 1; i++)
+    {
+        if (cur->next == NULL)
+        {
+            return ret;
+        }
+        cur = cur->next;
+    }
+    return ret;
+}
+
 int traverse(pid_t pid, struct proc *head)
 {
     int i = 0;

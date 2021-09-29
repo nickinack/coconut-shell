@@ -58,7 +58,7 @@ void sigchld_handler(int sig)
     {
         return;
     }
-    struct proc *bg_process = delete (idx, head);
+    struct proc *bg_process = get_node(idx, head);
     char *cmd = strtok(bg_process->cmd, " ");
     if (WIFEXITED(status))
     {
