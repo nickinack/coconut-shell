@@ -82,15 +82,15 @@ struct proc *get_node(int idx, struct proc *head)
         return ret;
     }
     struct proc *cur = head;
-    for (int i = 0; i < idx - 1; i++)
+    for (int i = 0; i < idx; i++)
     {
         if (cur->next == NULL)
         {
-            return ret;
+            return cur;
         }
         cur = cur->next;
     }
-    return ret;
+    return cur;
 }
 
 int traverse(pid_t pid, struct proc *head)
@@ -181,16 +181,17 @@ void print_jobs(struct proc *head, char flags[])
     while (cur != NULL)
     {
         char stat = proc_status(cur->pid);
-        char *stat_word = (stat == 'T' ? "Stopped" : "Running");
+        char *stat_word = (stat == 'T' ? "Stopped" : stat == 'n' ? "Stopped" : "Running");
+        printf("%c \n", stat);
         if (strlen(flags) == 2)
         {
             printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
-        else if ((flags[0] == 'r') && stat == 'R')
+        else if ((flags[0] == 'r') && strcmp(stat_word, "Running"))
         {
             printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
-        else if (flags[0] == 's' && stat == 'S')
+        else if (flags[0] == 's' && strcmp(stat_word, "Stopped"))
         {
             printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }

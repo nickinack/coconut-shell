@@ -1,20 +1,20 @@
 exit
 jobs
-bg 0
-pinfo 17417
-bg 0
 jobs -s
+sleep 2 &
+sleep 4 &
+jobs -r
+exit
 jobs
-emacs &
-bg 0
-sleep 40 &
-bg 0
+jobs -r
+sleep 2 &
+sleep 4 &
+exit
 jobs
-sleep 40 &
-bg 0
-emacs &
-bg 0
+sleep 2 &
+sleep 3 &
+exit
 jobs
-pinfo 15631
-emacs &
+sleep 3 &
+sleep 4 &
 exit
