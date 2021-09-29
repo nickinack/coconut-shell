@@ -5,8 +5,8 @@
 #include "ls.h"
 #include "pwd.h"
 #include "pinfo.h"
-#include "bg.h"
-#include "fg.h"
+#include "foreground.h"
+#include "background.h"
 #include "repeat.h"
 #include "history.h"
 #include "dup_fd.h"
@@ -178,11 +178,11 @@ void process_input(char *buffer)
         }
         else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
         {
-            bg_implementation(parts, cmd, args);
+            background_implementation(parts, cmd, args);
         }
         else
         {
-            fg_implementation(parts, cmd, args);
+            foreground_implementation(parts, cmd, args);
         }
         for (int i = 0; i < MINI_SZE-1; i++)
         {

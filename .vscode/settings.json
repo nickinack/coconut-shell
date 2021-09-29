@@ -7,6 +7,10 @@
         "string_view": "c",
         "vector": "c",
         "ranges": "c",
-        "random": "c"
+        "random": "c",
+        "foreground.h": "c",
+        "background.h": "c",
+        "utils.h": "c",
+        "execute_cmd.h": "c"
     }
 }

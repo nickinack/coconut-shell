@@ -1,6 +1,6 @@
 #include "headers.h"
 #include "repeat.h"
-#include "fg.h"
+#include "foreground.h"
 
 // idea: use recursive function until last repeat happens
 void repeat_implementation(int parts, char **args)
@@ -31,7 +31,7 @@ void repeat_implementation(int parts, char **args)
         }
         else
         {
-            fg_implementation(parts - 2, args[1], buf);
+            foreground_implementation(parts - 2, args[1], buf);
         }
     }
     return;

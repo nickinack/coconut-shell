@@ -1,7 +1,7 @@
 all: initialize
 
-initialize: headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o
-	gcc -o a headers.o utils.o execute_cmd.o pinfo.o bg.o fg.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o
+initialize: headers.o utils.o execute_cmd.o pinfo.o background.o foreground.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o bg.o fg.o
+	gcc -o a headers.o utils.o execute_cmd.o pinfo.o background.o foreground.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o bg.o fg.o
 
 headers.o: headers.c
 	gcc -c headers.c
@@ -15,11 +15,11 @@ execute_cmd.o: execute_cmd.c
 pinfo.o: pinfo.c
 	gcc -c pinfo.c
 
-bg.o: bg.c
-	gcc -c bg.c
+background.o: background.c
+	gcc -c background.c
 
-fg.o: fg.c
-	gcc -c fg.c
+foreground.o: foreground.c
+	gcc -c foreground.c
 
 cd.o: cd.c
 	gcc -c cd.c 
@@ -57,6 +57,12 @@ jobs.o: jobs.c
 sig.o: sig.c
 	gcc -c sig.c
 
+bg.o: bg.c
+	gcc -c bg.c
+
+fg.o: fg.c
+	gcc -c fg.c
+	
 clean:
 	rm -rf *.o 
 	rm -rf a

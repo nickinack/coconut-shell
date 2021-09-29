@@ -1,30 +1,46 @@
 #include "headers.h"
-#include "utils.h"
-#include "execute_cmd.h"
+#include "fg.h"
 
-void fg_implementation(int parts, char *cmd,  char *args[])
+void fg_implementation(int parts, char **args)
 {
-    signal(SIGTTOU, SIG_IGN);
-    setpgid(0, 0);
-    pid_t pid = fork();
-    if (pid < 0)
+    if (parts > 1)
     {
-        printf("failed to initiate fork \n");
+        printf("fg: too many arguments \n");
         return;
     }
-    else if (pid != 0)
+    if (parts < 1)
     {
-        int wstatus;
-        pid_t ppid = getpid();
-        tcsetpgrp(0, pid);
-        waitpid(pid, &wstatus, WUNTRACED);
-        tcsetpgrp(0, ppid);
-        signal(SIGTTOU, SIG_DFL);
+        printf("fg: too few arguments \n");
+        return;
     }
-    else if (pid == 0)
+    int proc_shell_id = atoi(args[0]);
+    if (proc_shell_id < 0)
     {
-        // printf("%d \n", getpid());
-        execute_cmd(parts, cmd, args);
+        printf("fg: invalid proc shell id \n");
+        return;
+    }
+    pid_t pid = get_pid_from_id(proc_shell_id, head);
+    if (pid == -1)
+    {
+        printf("fg: no process running for the given shell id \n");
+        return;
+    }
+    // give terminal control to the background process.
+    int status = 0;
+    pid_t shell_pid = getpgid(0);
+    signal(SIGTTOU, SIG_IGN);
+    tcsetpgrp(STDIN_FILENO, pid);
+    kill(pid, SIGCONT);
+    waitpid(pid, &status, WUNTRACED);
+    tcsetpgrp(STDIN_FILENO, shell_pid);
+    signal(SIGTTOU, SIG_DFL);
+    if (WIFSTOPPED(status))
+    {
+        printf("fg: process with pid [%d] has suspended normally \n", pid);
+    }
+    else
+    {
+        printf("fg: process with pid [%d] has suspended abnormally \n", pid);
     }
     return;
 }
