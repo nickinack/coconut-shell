@@ -1,20 +1,20 @@
 exit
+pinfo 52573
 jobs
+bg 1
+jobs
+pinfo 52573
+kill -20 52573
+gedit &
+jobs -r
+sleep 5 
+sleep 40 &
+exit
+pinfo 52342
 jobs -s
-sleep 2 &
-sleep 4 &
+ls
+sig - 9
 jobs -r
-exit
-jobs
-jobs -r
-sleep 2 &
-sleep 4 &
-exit
-jobs
-sleep 2 &
-sleep 3 &
-exit
-jobs
-sleep 3 &
-sleep 4 &
-exit
+sig 2 9
+pinfo 52342
+emacs abc.txt &

@@ -186,11 +186,11 @@ void print_jobs(struct proc *head, char flags[])
         {
             printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
-        else if ((flags[0] == 'r') && strcmp(stat_word, "Running"))
+        else if ((flags[0] == 'r') && strcmp(stat_word, "Running") == 0)
         {
             printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
-        else if (flags[0] == 's' && strcmp(stat_word, "Stopped"))
+        else if (flags[0] == 's' && strcmp(stat_word, "Stopped") == 0)
         {
             printf("[%d] %s %s [%d] \n", cur->shell_id, stat_word, cur->cmd, cur->pid);
         }
