@@ -36,3 +36,4 @@ void print_list(struct proc *head);
 void print_jobs(struct proc *head, char flags[]);
 pid_t get_pid_from_id(int id, struct proc *head);
 struct proc *get_node(int idx, struct proc *head);
+void kill_proc(struct proc *head);

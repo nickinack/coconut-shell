@@ -198,3 +198,22 @@ void print_jobs(struct proc *head, char flags[])
     }
     return;
 }
+
+void kill_proc(struct proc *head)
+{
+    int i = 0;
+    if (head == NULL)
+    {
+        return;
+    }
+    struct proc *cur = head;
+    cur = cur->next;
+    while (cur != NULL)
+    {
+        kill(cur->pid, SIGKILL);
+        cur = cur->next;
+        i++;
+    }
+    exit(0);
+    return;
+}

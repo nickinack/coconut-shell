@@ -74,3 +74,13 @@ void sigchld_handler(int sig)
     }
     
 }
+
+void sigint_handler(int signum)
+{
+    return;
+}
+
+void sigtstp_handler(int signum)
+{
+    return;
+}

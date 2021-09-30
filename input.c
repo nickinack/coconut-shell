@@ -22,6 +22,11 @@ int get_input()
     size_t command;
     buffer = (char *)malloc(bufsize * sizeof(char));
     int ptr = getline(&buffer, &bufsize, stdin);
+    if (ptr < 0)
+    {
+        PROGRAM_EXIT = -1;
+        return -1;
+    }
     buffer[ptr] = '\0';
     history_implementation(buffer);
     if (buffer == NULL)

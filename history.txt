@@ -1,20 +1,20 @@
 exit
-fg 1
-jobs
-sleep 10 &
-fg 0
-jobs
-sleep 40 &
+ls
+clear
+ls
+sleep 40
 exit
-pinfo 52573
-jobs
-bg 1
-jobs
-pinfo 52573
-kill -20 52573
-gedit &
-jobs -r
-sleep 5 
-sleep 40 &
+vim &
 exit
-pinfo 52342
+vim &
+exit
+vim &
+exit
+vim &
+exit
+vim &
+exit
+vim &
+exit
+exot
+vim &

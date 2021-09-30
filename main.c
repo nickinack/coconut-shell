@@ -7,6 +7,8 @@
 int main()
 {
     signal(SIGCHLD, sigchld_handler);
+    signal(SIGINT, sigint_handler);
+    signal(SIGTSTP, sigtstp_handler);
     getcwd(home_dir, SZE);
     getcwd(prev_dir, SZE);
     head = initialize_proc();
@@ -26,6 +28,8 @@ int main()
         prompt();
         get_input();
         if(PROGRAM_EXIT == -1){
+            printf("killing bg ... \n");
+            kill_proc(head);
             return 0;
         }
     }
