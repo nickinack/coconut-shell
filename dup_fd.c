@@ -6,11 +6,11 @@ int dup_fd_out(char *fname, char mode)
     int fd; 
     if (mode == 'n')
     {
-        fd = open(fname, O_CREAT | O_RDWR, 0644);
+        fd = open(fname, O_CREAT | O_RDWR | O_TRUNC, 0644);
     }
     else
     {
-        fd = open(fname, O_CREAT | O_RDWR | O_TRUNC, 0644);
+        fd = open(fname, O_CREAT | O_RDWR | O_APPEND, 0644);
     }
     if (fd < 0)
     {

@@ -1,7 +1,0 @@
-jobs.h 
-main.o 
-jobs.o 
-pwd.o 
-pwd.h 
-repeat.h 
-sig.c 
