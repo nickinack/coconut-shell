@@ -63,13 +63,19 @@ void sigchld_handler(int sig)
     if (WIFEXITED(status))
     {
         printf("\n[%s] command with pid [%d] ended normally \n", cmd, bg_process->pid);
-        prompt();
+        if (CUR_FG != 1)
+        {
+            prompt();
+        }
         fflush(stdout);
     }
     else
     {
         printf("\n[%s] command with pid [%d] ended abnormally \n", cmd, bg_process->pid);
-        prompt();
+        if (CUR_FG != 1)
+        {
+            prompt();
+        }
         fflush(stdout);
     }
     

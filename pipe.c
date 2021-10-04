@@ -76,10 +76,12 @@ void pipe_implementation(char *cmds)
     }
     int r1 = dup2(STDOUT_FD, STDOUT_FILENO);
     int r2 = dup2(STDIN_FD, STDIN_FILENO);
+    /*
     if (isatty(fileno(stdin)))
         printf( "stdin is a terminal\n" );
     else
         printf( "stdin is a file or a pipe\n");
+    */
     if (r1 < 0 || r2 < 0)
     {
         printf("piping failed \n");

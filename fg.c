@@ -31,11 +31,15 @@ void fg_implementation(int parts, char **args)
     signal(SIGTTOU, SIG_IGN);
     tcsetpgrp(STDIN_FILENO, pid);
     kill(pid, SIGCONT);
+    CUR_FG = 1;
     waitpid(pid, &status, WUNTRACED);
     tcsetpgrp(STDIN_FILENO, shell_pid);
     signal(SIGTTOU, SIG_DFL);
     int idx = traverse(pid, head);
-    delete(idx, head);
+    if (idx != -1)
+    {
+        delete (idx, head);
+    }
     if (WIFSTOPPED(status))
     {
         printf("fg: process with pid [%d] has suspended normally \n", pid);

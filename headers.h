@@ -17,6 +17,7 @@ char prev_dir[10000];
 int PROGRAM_EXIT;
 int SKIP_SCAN;
 int CUR_BG_ID;
+int CUR_FG;
 struct proc
 {
     pid_t pid;

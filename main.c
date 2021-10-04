@@ -6,6 +6,7 @@
 
 int main()
 {
+    CUR_FG = -1;
     signal(SIGCHLD, sigchld_handler);
     signal(SIGINT, sigint_handler);
     signal(SIGTSTP, sigtstp_handler);

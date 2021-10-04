@@ -1,20 +1,20 @@
 exit
-sleep 2
-sleep 2 &
+fg 0
+jobs
+sleep 5
+sleep 5
 exit
-vim b.txt
-cat < a.txt | wc -l > b.txt
-rm -rf b.txt
-vim b.txt
-cat < a.txt | wc -l > b.txt
-cat < a.txt | wc -l
+fg 0
+sleep 5
 exit
-cat < main.c | wc
-cat main.c | wc
+jobs
+fg 0
+jobs
+sleep 5
 exit
-cat a.txt | wc
-cat main.c | wc
-cat main.c | wc
-cat < main.c | wc
-exit
-cat < a.txt | wc
+jobs -s
+jobs
+fg 0
+sleep 5
+fg 0
+jobs
