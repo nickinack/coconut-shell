@@ -1,20 +1,20 @@
 exit
-ls
-clear
-ls
-sleep 40
+sleep 2
+sleep 2 &
 exit
-vim &
+vim b.txt
+cat < a.txt | wc -l > b.txt
+rm -rf b.txt
+vim b.txt
+cat < a.txt | wc -l > b.txt
+cat < a.txt | wc -l
 exit
-vim &
+cat < main.c | wc
+cat main.c | wc
 exit
-vim &
+cat a.txt | wc
+cat main.c | wc
+cat main.c | wc
+cat < main.c | wc
 exit
-vim &
-exit
-vim &
-exit
-vim &
-exit
-exot
-vim &
+cat < a.txt | wc

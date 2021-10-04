@@ -14,6 +14,7 @@
 #include "sig.h"
 #include "bg.h"
 #include "fg.h"
+#include "pipe.h"
 
 int get_input()
 {
@@ -128,87 +129,93 @@ void process_input(char *buffer)
     }
     for (int i = 0; i < k; i++)
     {
-        CURRENT_IN = 0;
-        CURRENT_OUT = 0;
-        char **args = (char **) malloc(MINI_SZE * sizeof(char *));
-        args[0] = (char *) malloc(MINI_SZE * sizeof(char));
-        for (int i = 0; i < MINI_SZE-1; i++)
-        {
-            args[i+1] = (char *) malloc(MINI_SZE * sizeof(char));
-        }
-        args[MINI_SZE] = NULL;
-        char *cmd = (char *)malloc(MINI_SZE);
-        int parts = tokenise(instructions[i], args, cmd);
-        if (parts == -1)
-        {
-            continue;
-        }
-        if (CURRENT_IN == -1 || CURRENT_OUT == -1)
-        {
-            return;
-        }
-        if (strcmp(cmd, "cd") == 0)
-        {
-            cd_implementation(parts, args);
-        }
-        else if (strcmp(cmd, "ls") == 0)
-        {
-            ls_implementation(parts, args);
-        }
-        else if (strcmp(cmd, "echo") == 0)
-        {
-            echo_implementation(parts, args);
-        }
-        else if (strcmp(cmd, "pwd") == 0)
-        {
-            pwd_implementation(parts, args);
-        }
-        else if (strcmp(cmd, "pinfo") == 0)
-        {
-            pinfo_implementation(parts, args);
-        }
-        else if (strcmp(cmd, "repeat") == 0)
-        {
-            repeat_implementation(parts, args);
-        }
-        else if (strcmp(cmd, "history") == 0)
-        {
-            history_handle(parts, args);
-        }
-        else if (strcmp(cmd, "jobs") == 0)
-        {
-            jobs_implementation(parts, args);
-        }
-        else if (strcmp(cmd, "sig") == 0)
-        {
-            sig_implementation(parts, args);
-        }
-        else if (strcmp(cmd, "bg") == 0)
-        {
-            bg_implementation(parts, args);
-        }
-        else if (strcmp(cmd, "fg") == 0)
-        {
-            fg_implementation(parts, args);
-        }
-        else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
-        {
-            background_implementation(parts, cmd, args);
-        }
-        else
-        {
-            foreground_implementation(parts, cmd, args);
-        }
-        for (int i = 0; i < MINI_SZE-1; i++)
-        {
-            free(args[i]);
-        }
-        char mode = 'i';
-        restore_fd(CURRENT_IN, mode);
-        mode = 'o';
-        restore_fd(CURRENT_OUT, mode);
-        free(args);
-        free(cmd);
+        pipe_implementation(instructions[i]);
     }
     free(token);
+}
+
+void parse_cmd(char *instruction)
+{
+    CURRENT_IN = 0;
+    CURRENT_OUT = 0;
+    char **args = (char **) malloc(MINI_SZE * sizeof(char *));
+    args[0] = (char *) malloc(MINI_SZE * sizeof(char));
+    for (int i = 0; i < MINI_SZE-1; i++)
+    {
+        args[i+1] = (char *) malloc(MINI_SZE * sizeof(char));
+    }
+    args[MINI_SZE] = NULL;
+    char *cmd = (char *)malloc(MINI_SZE);
+    int parts = tokenise(instruction, args, cmd);
+    if (parts == -1)
+    {
+        return;
+    }
+    if (CURRENT_IN == -1 || CURRENT_OUT == -1)
+    {
+        return;
+    }
+    if (strcmp(cmd, "cd") == 0)
+    {
+        cd_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "ls") == 0)
+    {
+        ls_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "echo") == 0)
+    {
+        echo_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "pwd") == 0)
+    {
+        pwd_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "pinfo") == 0)
+    {
+        pinfo_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "repeat") == 0)
+    {
+        repeat_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "history") == 0)
+    {
+        history_handle(parts, args);
+    }
+    else if (strcmp(cmd, "jobs") == 0)
+    {
+        jobs_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "sig") == 0)
+    {
+        sig_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "bg") == 0)
+    {
+        bg_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "fg") == 0)
+    {
+        fg_implementation(parts, args);
+    }
+    else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
+    {
+        background_implementation(parts, cmd, args);
+    }
+    else
+    {
+        foreground_implementation(parts, cmd, args);
+    }
+    for (int i = 0; i < MINI_SZE-1; i++)
+    {
+        free(args[i]);
+    }
+    char mode = 'i';
+    restore_fd(CURRENT_IN, mode);
+    mode = 'o';
+    restore_fd(CURRENT_OUT, mode);
+    free(args);
+    free(cmd);
+    return;
 }
