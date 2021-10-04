@@ -34,6 +34,8 @@ void fg_implementation(int parts, char **args)
     waitpid(pid, &status, WUNTRACED);
     tcsetpgrp(STDIN_FILENO, shell_pid);
     signal(SIGTTOU, SIG_DFL);
+    int idx = traverse(pid, head);
+    delete(idx, head);
     if (WIFSTOPPED(status))
     {
         printf("fg: process with pid [%d] has suspended normally \n", pid);
