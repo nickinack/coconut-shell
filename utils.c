@@ -83,10 +83,12 @@ void sigchld_handler(int sig)
 
 void sigint_handler(int signum)
 {
+    printf("sigint triggered \n");
     return;
 }
 
 void sigtstp_handler(int signum)
 {
+    printf("sigtstp triggered \n");
     return;
 }

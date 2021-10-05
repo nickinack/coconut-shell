@@ -1,0 +1,12 @@
+exit
+ls
+cat askd | wc
+ls
+ls | head -7 | tail -5
+ls
+ls | wc
+exit
+cat ls.txt | grep *.txt
+exit
+ls > ls.txt
+ls
