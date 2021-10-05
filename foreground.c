@@ -16,7 +16,7 @@ void foreground_implementation(int parts, char *cmd,  char *args[])
     else if (pid != 0)
     {
         int wstatus;
-        pid_t ppid = getpid();
+        pid_t ppid = getpgrp();
         waitpid(pid, &wstatus, WUNTRACED);
         tcsetpgrp(0, ppid);
         signal(SIGTTOU, SIG_DFL);

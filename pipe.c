@@ -33,7 +33,7 @@ void pipe_implementation(char *cmds)
             dup2(switch_input, STDIN_FILENO);
             parse_cmd(cmd[i]);
             // dup2(STDIN_FD, STDIN_FILENO);
-            close(fd[0]);
+            // close(fd[0]);
             break;
         }
         if (pipe(fd) < 0)
