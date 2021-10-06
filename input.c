@@ -79,7 +79,7 @@ int tokenise(char *buffer, char **args, char *cmd)
             token = strtok(NULL, space);
             continue;
         }
-        else if (strlen(token) == 1 && token[0] == '<')
+        else if (strlen(token) == 1 && token[0] == '<' && token[1] != '<')
         {
             // contents of this file should be redirected to input command
             token = strtok(NULL, space);
@@ -105,6 +105,11 @@ int tokenise(char *buffer, char **args, char *cmd)
             CURRENT_OUT = dup_fd_out(fout, mode);
             token = strtok(NULL, space);
             continue;
+        }
+        else if (strstr(token, "<<") || strstr(token, ">>>"))
+        {
+            printf("not valid redirection operator \n");
+            return -1;
         }
         strcpy(args[k++], token);
         token = strtok(NULL, space);

@@ -32,13 +32,21 @@ void fg_implementation(int parts, char **args)
     tcsetpgrp(STDIN_FILENO, pid);
     kill(pid, SIGCONT);
     CUR_FG = 1;
+    int idx = traverse(pid, head);
+    change_status(idx, head, 1);
     waitpid(pid, &status, WUNTRACED);
     tcsetpgrp(STDIN_FILENO, shell_pid);
     signal(SIGTTOU, SIG_DFL);
-    int idx = traverse(pid, head);
+    if (WIFSTOPPED(status))
+    {
+        // ctrl+z trigger
+        change_status(idx, head, 0);
+        return;
+    }
+    idx = traverse(pid, head);
     if (idx != -1)
     {
-        delete (idx, head);
+        delete(idx, head);
     }
     if (WIFSTOPPED(status))
     {

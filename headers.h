@@ -23,6 +23,7 @@ struct proc
     pid_t pid;
     char *cmd;
     int shell_id;
+    int fg_cur;
     struct proc *next;
 };
 struct proc *head;
@@ -38,3 +39,4 @@ void print_jobs(struct proc *head, char flags[]);
 pid_t get_pid_from_id(int id, struct proc *head);
 struct proc *get_node(int idx, struct proc *head);
 void kill_proc(struct proc *head);
+int change_status(int idx, struct proc *head, int val);

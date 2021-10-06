@@ -7,6 +7,7 @@ struct proc *create(pid_t pid, char *cmd)
     new_node->pid = pid;
     strcpy(new_node->cmd, cmd);
     new_node->next = NULL;
+    new_node->fg_cur = 0;
     return new_node;
 }
 
@@ -117,6 +118,34 @@ int traverse(pid_t pid, struct proc *head)
     return -1;
 }
 
+int change_status(int idx, struct proc *head, int val)
+{
+    if (val < 0 || val > 1)
+    {
+        return -1;
+    }
+    if (head == NULL)
+    {
+        return -1;
+    }
+    if (idx == 0)
+    {
+        return -1;
+    }
+    struct proc *cur = head;
+    for (int i = 0; i < idx; i++)
+    {
+        if (cur->next == NULL)
+        {
+            return -1;
+        }
+        cur = cur->next;
+    }
+    cur->fg_cur = val;
+    printf("[%d] status changed \n", cur->pid);
+    return 0;
+}
+
 pid_t get_pid_from_id(int id, struct proc *head)
 {
     int i = 0;
@@ -148,6 +177,7 @@ struct proc *initialize_proc()
     a->cmd = (char *)malloc(MINI_SZE);
     a->shell_id = -1;
     a->next = NULL;
+    a->fg_cur = 0;
     return a;
 }
 
@@ -180,6 +210,11 @@ void print_jobs(struct proc *head, char flags[])
     cur = cur->next;
     while (cur != NULL)
     {
+        if (cur->fg_cur == 1)
+        {
+            cur = cur->next;
+            continue;
+        }
         char stat = proc_status(cur->pid);
         char *stat_word = (stat == 'T' ? "Stopped" : stat == 'n' ? "Stopped" : "Running");
         if (strlen(flags) == 2)
