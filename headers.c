@@ -63,6 +63,7 @@ struct proc *delete(int idx, struct proc *head)
     temp = cur->next;
     ret->pid = temp->pid;
     strcpy(ret->cmd, temp->cmd);
+    ret->fg_cur = temp->fg_cur;
     cur->next = temp->next;
     free(temp);
     return ret;

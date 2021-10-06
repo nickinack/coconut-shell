@@ -60,7 +60,7 @@ void sigchld_handler(int sig)
     }
     struct proc *bg_process = delete(idx, head);
     char *cmd = strtok(bg_process->cmd, " ");
-    if (WIFEXITED(status))
+    if (WIFEXITED(status) && bg_process->fg_cur == 0)
     {
         printf("\n[%s] command with pid [%d] ended normally \n", cmd, bg_process->pid);
         if (CUR_FG != 1)
@@ -69,7 +69,7 @@ void sigchld_handler(int sig)
         }
         fflush(stdout);
     }
-    else
+    else if (bg_process->fg_cur == 0)
     {
         printf("\n[%s] command with pid [%d] ended abnormally \n", cmd, bg_process->pid);
         if (CUR_FG != 1)
@@ -78,7 +78,10 @@ void sigchld_handler(int sig)
         }
         fflush(stdout);
     }
-    
+    else
+    {
+        return;
+    }
 }
 
 void sigint_handler(int signum)
