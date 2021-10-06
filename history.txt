@@ -1,0 +1,20 @@
+exit
+fg 0
+sleep 100 &
+exit
+jobs
+fg 0
+jobs
+sleep 100 &
+exit
+fg 2
+jobs
+sleep 100 &
+jobs
+fg 1
+jobs
+sleep 100
+fg 0
+sleep 100 &
+exit
+jobs

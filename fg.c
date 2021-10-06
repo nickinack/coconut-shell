@@ -40,17 +40,16 @@ void fg_implementation(int parts, char **args)
     if (WIFSTOPPED(status))
     {
         // ctrl+z trigger
+        CUR_FG = 0;
         change_status(idx, head, 0);
         return;
     }
+    // everything else
     idx = traverse(pid, head);
     if (idx != -1)
     {
         delete(idx, head);
     }
-    if (WIFSTOPPED(status))
-    {
-        printf("fg: process with pid [%d] has suspended normally \n", pid);
-    }
+    // printf("fg: process with pid [%d] has suspended normally / on ctrl-c trigger \n", pid);
     return;
 }
