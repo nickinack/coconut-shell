@@ -1,20 +1,20 @@
 exit
-fg 0
-sleep 5 &
+vim cde.txt
+ls > abc.txt ; sort < abc.txt > cde.txt
+ls | sort
 exit
-exirt
-fg 0
-sleep 5 &
+cat < main.c headers.c
 exit
-fg 0
-sleep 5 &
+cat > a.txt
 exit
-fg 0
-sleep 5 &
+replay -command echo 123 hello -period 6 -interval 3
 exit
-fg 0
-sleep 10 &
+replay -command echo 123 hello -period 6 -interval 3
 exit
-fg 1
-jobs
-sleep 10 &
+replay -command echo 123 hello -period 6 -interval 3
+exit
+replay -command echo 123 hello -period 6 -interval 3
+replay -command echo 123 hello -period 6 -interval 3
+exit
+ replay -command echo 123 -period 6 -interval 3
+replay -command echo 123 -period 6 -interval 3

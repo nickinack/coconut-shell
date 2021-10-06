@@ -15,6 +15,7 @@
 #include "bg.h"
 #include "fg.h"
 #include "pipe.h"
+#include "replay.h"
 
 int get_input()
 {
@@ -203,6 +204,10 @@ void parse_cmd(char *instruction)
     else if (strcmp(cmd, "fg") == 0)
     {
         fg_implementation(parts, args);
+    }
+    else if (strcmp(cmd, "replay") == 0)
+    {
+        replay_implementation(parts, args);
     }
     else if (cmd && parts >= 1 && strcmp(args[parts-1], "&") == 0)
     {

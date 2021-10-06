@@ -1,7 +1,7 @@
 all: initialize
 
-initialize: headers.o utils.o execute_cmd.o pinfo.o background.o foreground.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o bg.o fg.o pipe.o
-	gcc -o a headers.o utils.o execute_cmd.o pinfo.o background.o foreground.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o bg.o fg.o pipe.o
+initialize: headers.o utils.o execute_cmd.o pinfo.o background.o foreground.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o bg.o fg.o pipe.o replay.o
+	gcc -o a headers.o utils.o execute_cmd.o pinfo.o background.o foreground.o cd.o ls.o echo.o pwd.o main.o prompt.o input.o repeat.o history.o dup_fd.o jobs.o sig.o bg.o fg.o pipe.o replay.o
 
 headers.o: headers.c
 	gcc -c headers.c
@@ -65,6 +65,9 @@ fg.o: fg.c
 	
 pipe.o: pipe.c
 	gcc -c pipe.c
+	
+replay.o: replay.c
+	gcc -c replay.c
 	
 clean:
 	rm -rf *.o 
