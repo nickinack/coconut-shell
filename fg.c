@@ -34,6 +34,7 @@ void fg_implementation(int parts, char **args)
     CUR_FG = 1;
     int idx = traverse(pid, head);
     change_status(idx, head, 1);
+    FG_RUN = 1;
     waitpid(pid, &status, WUNTRACED);
     tcsetpgrp(STDIN_FILENO, shell_pid);
     signal(SIGTTOU, SIG_DFL);

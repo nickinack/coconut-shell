@@ -144,7 +144,8 @@ void parse_cmd(char *instruction)
 {
     CURRENT_IN = 0;
     CURRENT_OUT = 0;
-    char **args = (char **) malloc(MINI_SZE * sizeof(char *));
+    FG_RUN = 0;
+    char **args = (char **)malloc(MINI_SZE * sizeof(char *));
     args[0] = (char *) malloc(MINI_SZE * sizeof(char));
     for (int i = 0; i < MINI_SZE-1; i++)
     {
@@ -221,6 +222,7 @@ void parse_cmd(char *instruction)
     {
         free(args[i]);
     }
+    FG_RUN = 0;
     char mode = 'i';
     restore_fd(CURRENT_IN, mode);
     mode = 'o';

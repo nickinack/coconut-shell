@@ -44,7 +44,8 @@ void replay_implementation(int parts, char **args)
         strcat(sleep_cmd, " ");
         sprintf(seconds, "%d", interval);   
         strcat(sleep_cmd, seconds);
-        pipe_implementation(sleep_cmd);
+        sleep(interval);
+        // pipe_implementation(sleep_cmd);
         pipe_implementation(cmd);
         period -= interval;
     }

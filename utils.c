@@ -86,10 +86,22 @@ void sigchld_handler(int sig)
 
 void sigint_handler(int signum)
 {
+    if (FG_RUN == 0)
+    {
+        printf("\n");
+        prompt();
+        fflush(stdout);
+    }
     return;
 }
 
 void sigtstp_handler(int signum)
 {
+    if (FG_RUN == 0)
+    {
+        printf("\n");
+        prompt();
+        fflush(stdout);
+    }
     return;
 }

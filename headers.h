@@ -18,6 +18,7 @@ int PROGRAM_EXIT;
 int SKIP_SCAN;
 int CUR_BG_ID;
 int CUR_FG;
+int FG_RUN;
 struct proc
 {
     pid_t pid;
