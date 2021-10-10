@@ -57,7 +57,7 @@ void retrieve_history()
 {
     hist_size = 0;
     FILE *fp;
-    fp = fopen(hname, "r");
+    fp = fopen(hname, "rw");
     char buf[SZE];
     while (fgets(buf, sizeof(buf), fp) != NULL)
     {

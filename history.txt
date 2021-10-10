@@ -1,20 +1,20 @@
 exit
-sleep 10
-exit
-ls | sort | cat
-exit
+sleep 2
 ls
+sleep 2 | cat
+rm -rf abc.txt
+vim abc.txt
+ls | sort | cat > abc.txt
+ls | sort
+ls
+exit
 jobs
-sleep 20
+sig 0 18
+vim &
+[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[[C[C[C[C[C[C[[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+jobs
+sig 0 9
+jobs
+vim &
 exit
-ls
-fg 0
-sleep 200 &
-sleep 20
-exit
-sleep 20
-exit
-sleep 20
-sleep
-ls
-exit
+sort < diff ls.c ls.h
